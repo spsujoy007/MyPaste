@@ -18,6 +18,11 @@ const MyNotes = () => {
             _id: 3,
             title: 'Top 3 interview question',
             note: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. '
+        },
+        {
+            _id: 4,
+            title: 'Top 5 Gifts for gf',
+            note: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. '
         }
     ]
 

@@ -8,13 +8,13 @@ module.exports = {
       {
         light: {
         
-"primary": "#3B8FF3",
+"primary": "#609966",
         
-"secondary": "#BFDBFE",
+"secondary": "#9DC08B",
         
-"accent": "#ca60f7",
+"accent": "#EDF1D6",
         
-"neutral": "#1A2028",
+"neutral": "#40513B",
         
 "info": "#33A9D1",
         

@@ -5,7 +5,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 const Main = () => {
     return (
         <div data-theme='light'>
-            <div className="drawer drawer-mobile ">
+            <div className="drawer drawer-mobile bg-accent">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content ">
     <Outlet></Outlet>
@@ -14,10 +14,10 @@ const Main = () => {
   </div> 
   <div className="drawer-side " >
     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-    <div className='p-4 w-80 bg-gray-200'>
+    <div className='p-4 w-80 bg-secondary'>
     {/* information */}
     <div>
-        <h2 className='text-xl font-bold mb-6 text-primary p-2 '>MyPaste</h2>
+        <h2 className='text-xl font-bold mb-6 text-neutral p-2 '>MyPaste</h2>
         <div className='flex justify-between items-center text-neutral gap-x-2 bg-white p-3 rounded-xl'>
             <div className='flex items-start gap-x-2'>
             <div className="avatar">

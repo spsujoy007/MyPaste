@@ -18,7 +18,7 @@ const NoteCard = ({mynote}) => {
             <div className='bg-primary  rounded-t-xl text-white p-2'> 
                 <h4>{title}</h4>
             </div>
-            <div className='p-2 text-neutral'>
+            <div className='p-2 text-neutral text-justify'>
                 {note.length > 125 ? <p>{note.slice(0, 125)}...</p> : note}
             </div>
             </div>
