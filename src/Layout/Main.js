@@ -4,6 +4,9 @@ import { AiOutlineLogout } from "react-icons/ai";
 import PinnedNote from '../Pages/Home/PinnedNote/PinnedNote';
 
 const Main = () => {
+
+    const heroColor = `#${Math.floor(Math.random() * 1e7).toString(16)}`
+
     return (
         <div data-theme='light'>
             <div className="drawer drawer-mobile bg-accent">
@@ -32,7 +35,7 @@ const Main = () => {
             </div>
             </div>
             <div className='p-3'>
-                <AiOutlineLogout className='text-xl text-primary'></AiOutlineLogout>
+                <AiOutlineLogout className={`text-xl text-primary`}></AiOutlineLogout>
             </div>
         </div>
     </div>

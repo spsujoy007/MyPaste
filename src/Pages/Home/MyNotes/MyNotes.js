@@ -1,41 +1,32 @@
-import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import NoteCard from './NoteCard';
 
 const MyNotes = () => {
-    const [gridItem, setGridItem] = useState(3);
 
-    const myNotes = [
-        {
-            _id: 1,
-            title: 'My resume',
-            note: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit tempore repellat aut. Dolor aut reiciendis commodi doloremque nisi quas nemo! Autem pariatur fugiat odio repellendus sint molestias, quisquam officiis labore.'
-        },
-        {
-            _id: 2,
-            title: 'The CV',
-            note: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit tempore repellat aut. Dolor aut reiciendis commodi doloremque nisi quas nemo! Autem pariatur fugiat odio repellendus sint molestias, quisquam officiis labore.'
-        },
-        {
-            _id: 3,
-            title: 'Top 3 interview question',
-            note: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. '
-        },
-        {
-            _id: 4,
-            title: 'Top 5 Gifts for gf',
-            note: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. '
+    const {data: myNotes = [], refetch, isLoading} = useQuery({
+        queryKey: ['myNotes'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/notes`);
+            const data = await res.json()
+            return data
         }
-    ]
+    })
 
+    refetch()
+
+    if(isLoading){
+        return <h2>Loading...</h2>
+    }
     
 
     return (
         <div className='mt-10'>
-            <div className={`grid lg:grid-cols-${gridItem} grid-cols-1 gap-3`}>
+            <div className={`grid lg:grid-cols-3 grid-cols-1 gap-3`}>
             {
                 myNotes.map(mynote => <NoteCard
                     key={mynote._id}
                     mynote={mynote}
+                    refetch={refetch}
                 ></NoteCard>)
             }
             </div>
