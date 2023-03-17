@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { AiOutlineLogout } from "react-icons/ai";
+import PinnedNote from '../Pages/Home/PinnedNote/PinnedNote';
 
 const Main = () => {
     return (
@@ -31,14 +32,13 @@ const Main = () => {
             </div>
             </div>
             <div className='p-3'>
-                <AiOutlineLogout className='text-xl text-blue-500'></AiOutlineLogout>
+                <AiOutlineLogout className='text-xl text-primary'></AiOutlineLogout>
             </div>
         </div>
     </div>
     
     <ul className="menu  text-base-content mt-10">
-      {/* <li><a>Sidebar Item 1</a></li>
-      <li><a>Sidebar Item 2</a></li> */}
+      <PinnedNote></PinnedNote>
     </ul>
     </div>
 

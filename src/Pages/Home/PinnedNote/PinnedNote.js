@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import NoteCard from './NoteCard';
+import React from 'react';
+import SingleNote from './SingleNote';
 
-const MyNotes = () => {
-    const [gridItem, setGridItem] = useState(3);
-
+const PinnedNote = () => {
     const myNotes = [
         {
             _id: 1,
@@ -27,20 +25,17 @@ const MyNotes = () => {
         }
     ]
 
-    
-
     return (
-        <div className='mt-10'>
-            <div className={`grid lg:grid-cols-${gridItem} grid-cols-1 gap-3`}>
+        <div>
+            <h6 className='text-neutral text-sm'>Pinned notes</h6>
             {
-                myNotes.map(mynote => <NoteCard
+                myNotes.map(mynote => <SingleNote
                     key={mynote._id}
                     mynote={mynote}
-                ></NoteCard>)
+                ></SingleNote>)
             }
-            </div>
         </div>
     );
 };
 
-export default MyNotes;
+export default PinnedNote;
