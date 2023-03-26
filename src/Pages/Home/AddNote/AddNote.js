@@ -8,11 +8,13 @@ const AddNote = () => {
             <div className='flex itemsc
              gap-x-2'>
                 <input type="text" className='input input-bordered w-full border-primary' placeholder='search here...'/>
-                <button data-tip='Click to add new note' className='w-[200px] tooltip tooltip-bottom bg-primary text-white hover:bg-secondary hover:text-neutral duration-200 rounded-md'>
-                <Link to='/addnote' className='flex gap-2 items-center justify-center'>
+                <Link to='/addnote'>
+                <div>
+                <button data-tip='Click to add new note' className='w-[200px] flex gap-2 items-center justify-center tooltip tooltip-bottom bg-primary text-white hover:bg-secondary hover:text-neutral duration-200 rounded-md h-[47px]'>
                     <BiCommentAdd className='text-xl'></BiCommentAdd> Add Note
-                </Link>
                 </button>
+                </div>
+                </Link>
             </div>
         </div>
     );

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AiOutlineEye, AiOutlineFileAdd, AiOutlineRollback } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 import { } from "react-icons/ai";
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../../Context/AuthProvider';
 // import fireimg from '../../../../public/images/fire.gif'
 
 const AddNotePage = () => {
+    const {user} = useContext(AuthContext);
     const [fire, setFire] = useState(false);
     const [noteLength, setNoteLength] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -18,10 +21,12 @@ const AddNotePage = () => {
         const note = form.note.value;
         const notebody = {
             title,
-            note
+            note,
+            email: user?.email
         }
 
-        const url = `http://localhost:5000/addnote`;
+        if(noteLength.length >= 5){
+            const url = `http://localhost:5000/addnote`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -32,16 +37,21 @@ const AddNotePage = () => {
         .then(res => res.json())
         .then(data => {
             if(data.acknowledged){
-                console.log(data)
+                navigator.clipboard.writeText(note)
+                toast.success('Note copied')
                 navigate('/')
                 setLoading(false)
             }
         })
+        }
+        else{
+            toast.error('Hey Gems! Please write something then add, at least 5 letters')
+            setLoading(false)
+        }
     }
 
     return (
         <div className='md:px-20 px-3'>
-            <form onSubmit={handleAddNote}>
             <div className='py-5 flex justify-end'>
                 <div className='text-2xl text-primary flex gap-x-3'>
                     <Link to='/'>
@@ -50,6 +60,7 @@ const AddNotePage = () => {
                     <button data-tip='Preview text' className='p-2 hover:text-neutral tooltip tooltip-bottom'><AiOutlineEye></AiOutlineEye></button>
                 </div>
             </div>
+            <form onSubmit={handleAddNote}>
             <div>
                 <div className='flex items-center'>
                     <input name='title' onFocus={() => {setFire(true)}} onBlur={() => setFire(false)} type="text" placeholder='title' className='w-full text-xl text-primary p-3 outline-none border-l-4 border-primary'/> 
