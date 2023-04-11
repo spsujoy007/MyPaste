@@ -1,10 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import NoteCard from './NoteCard';
 
-const MyNotes = () => {
+const MyNotes = ({filedData}) => {
+    const {filteredData, setFilteredData, searchField} = filedData;
+    console.log("FIlterdData", filteredData)
+    
+
     const {user} = useContext(AuthContext)
 
     const {data: myNotes = [], refetch, isLoading} = useQuery({
@@ -15,6 +19,14 @@ const MyNotes = () => {
             return data
         }
     })
+    // setFilteredData(myNotes)
+
+    useEffect(() => {
+        const filtering = myNotes.filter(note => 
+            note.title.toLowerCase().includes(searchField.toLowerCase())    
+        )
+        setFilteredData(filtering)
+    }, [myNotes, searchField, setFilteredData])
 
     refetch()
 
@@ -26,14 +38,23 @@ const MyNotes = () => {
     return (
         <div className='mt-10'>
             {
-                myNotes.length > 0 ?
+                 myNotes.length  > 0 ?
             <div className={`grid lg:grid-cols-3 grid-cols-1 gap-3`}>
                 {
-                myNotes.map(mynote => <NoteCard
-                    key={mynote._id}
-                    mynote={mynote}
-                    refetch={refetch}
-                ></NoteCard>)
+                    filteredData ?
+                    filteredData.map(mynote => <NoteCard
+                        key={mynote._id}
+                        mynote={mynote}
+                        refetch={refetch}
+                    ></NoteCard>
+                    )
+                    :
+                    myNotes.map(mynote => <NoteCard
+                        key={mynote._id}
+                        mynote={mynote}
+                        refetch={refetch}
+                    ></NoteCard>
+                    )
                 }
             </div>
             :

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AiOutlineLogout } from "react-icons/ai";
 import PinnedNote from '../Pages/Home/PinnedNote/PinnedNote';
@@ -21,7 +21,7 @@ const Main = () => {
   refetch()
 
   if(isLoading){
-      return <h2>Loading...</h2>
+      return <h2 className=''>Loading...</h2>
   }
 
   const handleSignOut = () => {
@@ -35,7 +35,7 @@ const Main = () => {
             <div className="drawer drawer-mobile bg-accent">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content ">
-    <Outlet refetch={refetch()}></Outlet>
+    <Outlet></Outlet>
     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
   
   </div> 

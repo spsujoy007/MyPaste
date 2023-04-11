@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import SingleNote from './SingleNote';
 
-const PinnedNote = () => {
+const PinnedNote = ({pinRefetch}) => {
 
     const {data: pinednotes = [], refetch, isLoading} = useQuery({
         queryKey: ["pinednotes"],
