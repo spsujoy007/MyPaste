@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AddNote from '../AddNote/AddNote';
 import MyNotes from '../MyNotes/MyNotes';
+import './Home.css'
 
 const Home = () => {
 
@@ -16,7 +17,7 @@ const Home = () => {
     }
     
     return (
-        <div className='p-5'>
+        <div className='p-5 homePage'>
             <AddNote filedData={filedData}></AddNote>
             <MyNotes filedData={filedData}></MyNotes>
         </div>

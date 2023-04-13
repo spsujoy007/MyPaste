@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { BiCopy } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
@@ -12,8 +12,22 @@ const NoteCard = ({mynote, refetch}) => {
     const navigate = useNavigate()
 
     const clickToCopy = () => {
-        navigator.clipboard.writeText(note)
-        toast.success(`${title.slice(0,15)} COPIED!`)
+        try{
+            navigator.clipboard.writeText(note)
+        }
+        finally{
+            toast.success(`${title.slice(0,15)} COPIED!`)
+            const url = `http://localhost:5000/copiedCount?id=${_id}`
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {})
+
+        }
     }
 
     const handleDeleteNote = (id) => {
@@ -26,6 +40,7 @@ const NoteCard = ({mynote, refetch}) => {
             if(data.deletedCount > 0){
                 toast.success(`${title.slice(0, 15)}... is deleted`);
                 refetch()
+                window.location.reload()
                 setLoading(false)
             }
         })
@@ -33,9 +48,9 @@ const NoteCard = ({mynote, refetch}) => {
 
     return (
         <div className='rounded-xl  bg-secondary'>
-            <div className="h-[150px] overflow-hidden">
+            <div onClick={() => navigate(`/note/${_id}`)} className="h-[150px] overflow-hidden">
             <div data-tip='Click to copy' onClick={() => {
-                clickToCopy()
+                clickToCopy(_id)
                 setButtonCopy(true)
                 setTimeout(() => setButtonCopy(false), 3000)
                 }} className='bg-neutral tooltip tooltip-top w-full text-left hover:cursor-pointer rounded-t-xl text-white p-2'> 

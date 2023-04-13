@@ -6,12 +6,16 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const {login, updateUserData} = useContext(AuthContext);
+    const {login, user} = useContext(AuthContext);
     const [error, setError] = useState(null);
-    const [headName, setHeadName] = useState('');
     const navigate = useNavigate()
 
-    const handleSignUp = (e) => {
+    if(user){
+        navigate('/')
+        toast.error('You already logged in')
+    }
+
+    const handleSignIn = (e) => {
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
@@ -19,7 +23,7 @@ const Login = () => {
         login(email, password)
         .then(result => {
             const user = result.user;
-            if(user.uid){
+            if(user?.email){
                 toast.success(`Welcome ${user.displayName}`)
                 navigate('/')
             }
@@ -32,15 +36,15 @@ const Login = () => {
 
     return (
         <div className="md:p-20 p-5">
-            <div className="px-5 py-10 bg-white rounded-xl">
-                <div className="flex justify-between items-center border-b-2 border-accent pb-2">
+            {
+                !user &&
+                <div className="px-5 py-10 bg-white rounded-xl">
+                <div className="border-b-2 border-accent pb-2">
                     <h2 className='text-3xl font-bold uppercase text-primary  text-left '>Login</h2>
-                    {
-                        headName && headName.length >= 4 && <h5>Hey! "{headName}" 😜</h5>
-                    }
+                    
                 </div>
                 <div className="flex md:flex-row flex-col gap-10">
-                <form onSubmit={handleSignUp} className="mt-6 flex flex-col md:w-[50%]">
+                <form onSubmit={handleSignIn} className="mt-6 flex flex-col md:w-[50%]">
 
                     <input name='email' required type="email" placeholder='type your email' className='py-3 bg-accent px-2 border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
 
@@ -60,6 +64,7 @@ const Login = () => {
                 </div>
                 </div>
             </div>
+            }
         </div>
     );
 };
