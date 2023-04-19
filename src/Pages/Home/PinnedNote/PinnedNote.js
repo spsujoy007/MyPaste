@@ -9,7 +9,7 @@ const PinnedNote = () => {
     const {data: pinednotes = [], refetch, isLoading} = useQuery({
         queryKey: ["pinednotes"],
         queryFn: async () =>{
-            const res = await fetch(`http://localhost:5000/pinnotes?email=${user?.email}`);
+            const res = await fetch(`https://mypaste.vercel.app/pinnotes?email=${user?.email}`);
             const data = await res.json()
             return data
         }
@@ -33,7 +33,7 @@ const PinnedNote = () => {
                 :
                 <>
                     <div>
-                        <img src="https://i.ibb.co/mRLgz9L/logoMP.png" alt="" />
+                        {/* <img src="https://i.ibb.co/mRLgz9L/logoMP.png" alt="" /> */}
                     </div>
                 </>
             }

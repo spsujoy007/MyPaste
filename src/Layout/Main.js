@@ -1,20 +1,21 @@
 import React, { useContext, useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineLogout, AiOutlinePlus } from "react-icons/ai";
 import PinnedNote from '../Pages/Home/PinnedNote/PinnedNote';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Context/AuthProvider';
 
 const Main = () => {
+  const navigate = useNavigate()
+  const theme = localStorage.getItem('currentTheme')
 
-  const {user, logout} = useContext(AuthContext)
+  const {user, logout, fieldValue} = useContext(AuthContext)
   const locations = useLocation()
-  console.log(locations)
 
   const {data: myNotesTotal = [], refetch, isLoading} = useQuery({
     queryKey: ['myNotesTotal'],
     queryFn: async () => {
-        const res = await fetch(`http://localhost:5000/notes?email=${user?.email}`);
+        const res = await fetch(`https://mypaste.vercel.app/notes?email=${user?.email}`);
         const data = await res.json()
         return data
     }
@@ -28,19 +29,24 @@ const Main = () => {
       </div>
     </div>
   }
+  refetch()
 
   const handleSignOut = () => {
     logout()
     .then(() => {})
-    .catch(e => console.error(e))
+    .catch(e => {
+      window.location.reload()
+      console.error(e)
+    })
   }
 
+
     return (
-        <div data-theme='light'>
+        <div data-theme={theme}>
             <div className="drawer drawer-mobile bg-accent">
   <input id="siteDashBoard" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content overflow-hidden">
-    <Outlet></Outlet>
+      <Outlet></Outlet>
     {
       locations.pathname !== '/addnote' && 
       <div className='flex items-end justify-end fixed m-10 lg:hidden top-[80%] left-[70%] z-10'>
@@ -68,13 +74,17 @@ const Main = () => {
         </Link>
         <div className='flex justify-between items-center text-neutral gap-x-2 bg-white p-3 rounded-xl'>
             <div className='flex items-start gap-x-2'>
+            <Link to="/myprofile">
             <div className="avatar">
             <div className="w-12 rounded-full">
                 <img src={user?.photoURL} alt={user?.displayName} />
             </div>
             </div>
+            </Link>
             <div>
-            <h4 className='text-lg uppercase mt-0 font-semibold'>{user?.displayName}</h4>
+              <Link to="/myprofile">
+                  <h4 className='text-lg uppercase mt-0 font-semibold'>{user?.displayName}</h4>
+              </Link>
             <p className='text-sm'>Total note: {myNotesTotal.length}</p>
             </div>
             </div>
@@ -88,10 +98,12 @@ const Main = () => {
     </div>
     :
     <div>
+      <Link to='/'>
       <button>
           <h2 className='text-xl font-bold mb-6 text-neutral p-2 '>MyPaste</h2>
         </button>
         <h2 className='text-neutral text-xl p-3 bg-white rounded-xl'>Hey devs! Please login first.</h2>
+      </Link>
     </div>
     }
     

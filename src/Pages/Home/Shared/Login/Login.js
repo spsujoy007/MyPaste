@@ -6,13 +6,13 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const {login, user} = useContext(AuthContext);
+    const {login, user, googleSign} = useContext(AuthContext);
     const [error, setError] = useState(null);
     const navigate = useNavigate()
 
     if(user){
         navigate('/')
-        toast.error('You already logged in')
+        // toast.error('You already logged in')
     }
 
     const handleSignIn = (e) => {
@@ -33,6 +33,16 @@ const Login = () => {
             setError(e.message)
         })}
 
+        const handleGoogleSign = () => {
+            googleSign()
+            .then(result => {
+                if(result){
+                    toast.success(`Welcome ${user.displayName}`)
+                    navigate('/')
+                }
+            })
+        }
+
 
     return (
         <div className="md:p-20 p-5">
@@ -48,7 +58,7 @@ const Login = () => {
 
                     <input name='email' required type="email" placeholder='type your email' className='py-3 bg-accent px-2 border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
 
-                    <input name='password' required type="password" placeholder='create a password' className='py-3 bg-accent px-2  border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
+                    <input name='password' required type="password" placeholder='your password' className='py-3 bg-accent px-2  border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
 
                     {error && <h2 className='text-red-500'>{error}</h2>}
                     <button type='submit' className='uppercase mt-6 rounded-full hover:bg-neutral duration-150 py-3 px-5 bg-primary text-white'>
@@ -60,7 +70,7 @@ const Login = () => {
 
                 <div className='mt-6 flex items-center justify-center md:w-[50%]'>
                     {/* <h2 className='text-primary text-lg'>Social Signup</h2> */}
-                    <button className='py-2 px-5 flex gap-2 text-md items-center border-[1px] rounded-full duration-150 border-gray-700 text-gray-700 hover:px-8'><FcGoogle className='text-xl'></FcGoogle> Continue with google</button>
+                    <button onClick={() => handleGoogleSign()} className='py-2 px-5 flex gap-2 text-md items-center border-[1px] rounded-full duration-150 border-gray-700 text-gray-700 hover:px-8'><FcGoogle className='text-xl'></FcGoogle> Continue with google</button>
                 </div>
                 </div>
             </div>

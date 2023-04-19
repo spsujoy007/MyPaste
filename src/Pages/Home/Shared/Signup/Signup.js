@@ -6,16 +6,16 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-    const {user} = useState(AuthContext)
-    const {createUser, updateUserData} = useContext(AuthContext);
+    const {createUser, updateUserData, user, googleSign} = useContext(AuthContext);
     const [currentImg, setCurrentImg] = useState(null);
+    const [error, setError] = useState(null)
     const [profileImg, setProfileImg] = useState(null);
     const [headName, setHeadName] = useState('');
     const navigate = useNavigate()
 
     if(user?.uid){
         return setTimeout(() => {
-            navigate('/login')
+            navigate('/')
         }, 3000)
     }
     
@@ -47,10 +47,14 @@ const Signup = () => {
                         navigate('/')
                     }
                 })
+                .catch(e => {
+                    console.error(e)
+                    setError(e.message)
+                })
             }
         })
-
-        }
+        
+    }
 
     const updateProfile = (name, picture) => {
         const profile = {
@@ -59,7 +63,7 @@ const Signup = () => {
         }
         updateUserData(profile)
         .then(() => {})
-        .catch(e => console.error(e))
+        .catch(e => setError(e.message))
     }
     
     const handleViewPhoto = (e) => {
@@ -69,6 +73,17 @@ const Signup = () => {
             setCurrentImg(img)
             setProfileImg(imgdata)
         }
+    }
+
+    const handleGoogleSign = () => {
+        googleSign()
+        .then(result => {
+            if(result){
+                toast.success(`Welcome ${user.displayName}`)
+                navigate('/')
+            }
+        })
+        .catch(e => setError(e.message))
     }
 
 
@@ -105,6 +120,7 @@ const Signup = () => {
 
                     <input name='password' required type="password" placeholder='create a password' className='py-3 bg-accent px-2  border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
 
+                    {error && <h2 className='text-red-500'>{error}</h2>}
                     <button type='submit' className='mt-6 rounded-full hover:bg-neutral duration-150 py-3 px-5 bg-primary text-white'>
                         Sign up
                     </button>
@@ -114,7 +130,7 @@ const Signup = () => {
 
                 <div className='mt-6 flex items-center justify-center md:w-[50%]'>
                     {/* <h2 className='text-primary text-lg'>Social Signup</h2> */}
-                    <button className='py-2 px-5 flex gap-2 text-md items-center border-[1px] rounded-full duration-150 border-gray-700 text-gray-700 hover:px-8'><FcGoogle className='text-xl'></FcGoogle> Continue with google</button>
+                    <button onClick={() => handleGoogleSign()} className='py-2 px-5 flex gap-2 text-md items-center border-[1px] rounded-full duration-150 border-gray-700 text-gray-700 hover:px-8'><FcGoogle className='text-xl'></FcGoogle> Continue with google</button>
                 </div>
                 </div>
             </div>

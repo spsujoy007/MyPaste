@@ -5,15 +5,14 @@ import { AuthContext } from '../../../Context/AuthProvider';
 import NoteCard from './NoteCard';
 
 const MyNotes = ({filedData}) => {
+    const {user, fieldValue} = useContext(AuthContext)
     const {filteredData, setFilteredData, searchField} = filedData;
+
     
-
-    const {user} = useContext(AuthContext)
-
     const {data: myNotes = [], refetch, isLoading} = useQuery({
         queryKey: ['myNotes'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/notes?email=${user?.email}`);
+            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user?.email}`);
             const data = await res.json()
             return data
         }
@@ -33,7 +32,6 @@ const MyNotes = ({filedData}) => {
         return <h2>Loading...</h2>
     }
     
-
     return (
         <div className='mt-10'>
             {
@@ -67,7 +65,7 @@ const MyNotes = ({filedData}) => {
                 }
             </div>
             :
-            <div className="w-[600px] overflow-hidden h-[300px] rounded-lg bg-white p-5">
+            <div className="md:w-[600px] overflow-hidden h-[300px] rounded-lg bg-white p-5">
                 <h2 className='text-2xl font-semibold text-secondary'>There are no notes here...</h2>
                 <div className="flex justify-end mt-9 -ml-12">
                     <Link data-tip="Tap to add note" to='/addnote' className='cursor-pointer tooltip tooltip-top '>

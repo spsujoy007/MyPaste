@@ -16,7 +16,7 @@ const NoteDetails = () => {
     
     const handleClickToPin = () => {
 
-        const url = `http://localhost:5000/pin?id=${_id}`
+        const url = `https://mypaste.vercel.app/pin?id=${_id}`
         fetch(url, {
             method: "PUT",
             headers: {
@@ -35,7 +35,7 @@ const NoteDetails = () => {
     }
 
     const handleRemovePin = () => {
-        const url = `http://localhost:5000/removePin?id=${_id}`
+        const url = `https://mypaste.vercel.app/removePin?id=${_id}`
         fetch(url, {
             method: "PUT"
         })

@@ -22,11 +22,12 @@ const AddNotePage = () => {
         const notebody = {
             title,
             note,
-            email: user?.email
+            email: user?.email,
+            copied_count: 0
         }
 
         if(noteLength.length >= 5){
-            const url = `http://localhost:5000/addnote`;
+            const url = `https://mypaste.vercel.app/addnote`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -57,7 +58,7 @@ const AddNotePage = () => {
                     <Link to='/'>
                     <button data-tip='Back to home' className='p-2 hover:text-neutral tooltip tooltip-bottom'><AiOutlineRollback></AiOutlineRollback></button>
                     </Link>
-                    <button data-tip='Preview text' className='p-2 hover:text-neutral tooltip tooltip-bottom'><AiOutlineEye></AiOutlineEye></button>
+                    <button data-tip='Preview not available' className='p-2 hover:text-neutral tooltip tooltip-left'><AiOutlineEye></AiOutlineEye></button>
                 </div>
             </div>
             <form onSubmit={handleAddNote}>
@@ -70,11 +71,9 @@ const AddNotePage = () => {
                 </div>
 
                 <div className='flex'>
-                    <textarea name="note" onChange={(e) => {setNoteLength(e.target.value)}} className='mt-2 overflow-hidden border-l-4 border-primary w-full p-3 outline-none rounded-r-md text-primary pt-8' placeholder='write your note champion...' id="" cols="30" rows="13">
+                    <textarea name="note" onChange={(e) => {setNoteLength(e.target.value)}} className='mt-2 overflow-hidden border-l-4 border-primary w-full p-3 outline-none rounded-r-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
                     </textarea>
-                    <p className='text-neutral -ml-40 mt-3 text-sm'>
-                        Total letters: {noteLength.length ? noteLength.length : 0}
-                    </p>
+                    
                 </div>
 
                 <div>

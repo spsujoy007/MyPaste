@@ -6,6 +6,7 @@ import NoteDetails from "../Pages/Home/NoteDetails/NoteDetails";
 import Login from "../Pages/Home/Shared/Login/Login";
 import Signup from "../Pages/Home/Shared/Signup/Signup";
 import PrivetRoute from "../PrivetRoute/PrivetRoute";
+import MyProfile from "../Pages/Home/MyProfile/MyProfile";
 
 export const routes = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/note/:id',
-                loader: async ({params}) => fetch(`http://localhost:5000/note/${params.id}`),
+                loader: async ({params}) => fetch(`https://mypaste.vercel.app/note/${params.id}`),
                 element: <PrivetRoute><NoteDetails></NoteDetails></PrivetRoute>
             },
             {
@@ -32,6 +33,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/myprofile',
+                element: <MyProfile></MyProfile>
             },
         ]
     }
