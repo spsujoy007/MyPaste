@@ -13,6 +13,9 @@ const AddNotePage = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
+    const [notetitle, setNotetitle] = useState('')
+    const [noteDetailPreview, setNoteDetailPreview] = useState('')
+
     const handleAddNote = (e) => {
         e.preventDefault()
         setLoading(true)
@@ -58,20 +61,48 @@ const AddNotePage = () => {
                     <Link to='/'>
                     <button data-tip='Back to home' className='p-2 hover:text-neutral tooltip tooltip-bottom'><AiOutlineRollback></AiOutlineRollback></button>
                     </Link>
-                    <button data-tip='Preview not available' className='p-2 hover:text-neutral tooltip tooltip-left'><AiOutlineEye></AiOutlineEye></button>
+                    {/* <button data-tip='Preview not available' className='p-2 hover:text-neutral tooltip tooltip-left'><AiOutlineEye></AiOutlineEye></button> */}
+
+                    {/* preview of note start */}
+                    {/* The button to open modal */}
+                    <label htmlFor="modal-preview" className="p-2 cursor-pointer hover:text-neutral tooltip tooltip-left">
+                        <AiOutlineEye></AiOutlineEye>
+                    </label>
+
+                    <input type="checkbox" id="modal-preview" className="modal-toggle" />
+                    <div className="modal">
+                      <div className="modal-box relative">
+                        <label htmlFor="modal-preview" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                        <h3 className="text-2xl font-bold">{notetitle}</h3>
+                        <p className="py-4 text-lg"><span className='font-bold text-black'>Note:</span> <br /> {noteDetailPreview}</p>
+                      </div>
+                    </div>
+                    {/* preview of note end */}
+
                 </div>
             </div>
             <form onSubmit={handleAddNote}>
             <div>
                 <div className='flex items-center'>
-                    <input name='title' onFocus={() => {setFire(true)}} onBlur={() => setFire(false)} type="text" placeholder='title' className='w-full text-xl text-primary p-3 outline-none border-l-4 border-primary'/> 
+                    <input 
+                        name='title'
+                        onFocus={() => {setFire(true)}}
+                        onBlur={() => setFire(false)}
+                        onChange={(e) => setNotetitle(e.target.value)}
+                       type="text" placeholder='title' className='w-full text-xl text-primary p-3 outline-none border-l-4 border-primary'/> 
                     {
                         fire && <img className='w-[35px] -ml-10 -mt-3' src='https://i.gifer.com/5Mz4.gif' alt="fire" />
                     }
                 </div>
 
                 <div className='flex'>
-                    <textarea name="note" onChange={(e) => {setNoteLength(e.target.value)}} className='mt-2 overflow-hidden border-l-4 border-primary w-full p-3 outline-none rounded-r-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
+                    <textarea 
+                        name="note" 
+                        onChange={(e) => {
+                            setNoteLength(e.target.value)
+                            setNoteDetailPreview(e.target.value)
+                        }}
+                     className='mt-2 overflow-hidden border-l-4 border-primary w-full p-3 outline-none rounded-r-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
                     </textarea>
                     
                 </div>
