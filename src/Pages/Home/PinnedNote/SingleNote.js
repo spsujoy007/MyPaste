@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 const SingleNote = ({mynote}) => {
+    const {title, note} = mynote;
     const navigate = useNavigate()
 
     const clickToCopy = () => {
@@ -16,7 +17,7 @@ const SingleNote = ({mynote}) => {
     return (
         <div className='px-2 py-3 bg-accent mt-2 rounded-xl cursor-pointer hover:rounded-none duration-500'>
             <div className="flex justify-between items-center">
-                <h4 onClick={clickToCopy} className='text-neutral font-semibold text-md uppercase'>{mynote.title.slice(0,20)}</h4>
+                <h4 onClick={clickToCopy} className='text-neutral font-semibold text-md uppercase'>{title ? title.slice(0,20) : note.slice(0,20)}</h4>
                 <Link to={`/note/${mynote._id}`}>
                 <button className='px-3 animate-pulse duration-500'>
                     <AiFillEye className='text-2xl text-neutral'></AiFillEye>
