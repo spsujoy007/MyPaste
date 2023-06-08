@@ -73,7 +73,7 @@ const AddNotePage = () => {
                     <div className="modal">
                       <div className="modal-box relative">
                         <label htmlFor="modal-preview" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                        <h3 className="text-2xl font-bold">{notetitle}</h3>
+                        <h3 className="text-xl font-bold">{notetitle}</h3>
                         <p className="py-4 text-lg"><span className='font-bold text-black'>Note:</span> <br /> {noteDetailPreview}</p>
                       </div>
                     </div>
@@ -102,7 +102,7 @@ const AddNotePage = () => {
                             setNoteLength(e.target.value)
                             setNoteDetailPreview(e.target.value)
                         }}
-                     className='mt-2 overflow-hidden border-l-4 border-primary w-full p-3 outline-none rounded-r-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
+                     className='mt-2 overflow-hidden border-primary w-full p-3 outline-none rounded-t-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
                     </textarea>
                     
                 </div>

@@ -33,7 +33,9 @@ const Main = () => {
 
   const handleSignOut = () => {
     logout()
-    .then(() => {})
+    .then(() => {
+      window.location.reload()
+    })
     .catch(e => {
       window.location.reload()
       console.error(e)
@@ -85,7 +87,8 @@ const Main = () => {
               <Link to="/myprofile">
                   <h4 className='text-lg uppercase mt-0 font-semibold'>{user?.displayName}</h4>
               </Link>
-            <p className='text-sm'>Total note: {myNotesTotal.length}</p>
+            {/* <p className='text-sm'>Total note: {myNotesTotal.length}</p> */}
+            <p className='text-sm'>Keep Pasting</p>
             </div>
             </div>
             <div data-tip="Tap to logout" className='p-3 tooltip tooltip-left flex items-center'>

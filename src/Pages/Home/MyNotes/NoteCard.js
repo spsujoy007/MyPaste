@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { BiCopy } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import './NoteCard.css'
 import { useNavigate } from 'react-router-dom';
+import { DataContext } from '../../../Context/DataProvider';
 
-const NoteCard = ({mynote, refetch}) => {
+const NoteCard = ({mynote, callRefetch}) => {
+    const {setCallRefetch} = useContext(DataContext)
+
     const {title, _id, note} = mynote;
     const [buttonCopy, setButtonCopy] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -41,8 +44,8 @@ const NoteCard = ({mynote, refetch}) => {
         .then(data => {
             if(data.deletedCount > 0){
                 toast.success(`${title.slice(0, 15)}... is deleted`);
-                refetch()
-                window.location.reload()
+                callRefetch()
+                // setCallRefetch(refetch)
                 setLoading(false)
             }
         })

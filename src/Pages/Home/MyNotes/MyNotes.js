@@ -12,7 +12,7 @@ const MyNotes = ({filedData}) => {
     const {data: myNotes = [], refetch, isLoading} = useQuery({
         queryKey: ['myNotes'],
         queryFn: async () => {
-            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user?.email}`);
+            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user.email}`);
             const data = await res.json()
             return data
         }
@@ -26,10 +26,17 @@ const MyNotes = ({filedData}) => {
         setFilteredData(filtering)
     }, [myNotes, searchField, setFilteredData])
 
-    refetch()
+    function callRefetch () {
+        refetch()
+    }
 
     if(isLoading){
-        return <h2>Loading...</h2>
+        return <div className='flex items-center justify-center h-[80vh]'>
+        <div>
+          <h2 className='text-6xl font-semibold text-primary uppercase animate-pulse'>Loading...</h2>
+          <p className='text-2xl text-secondary'>Wait for sometime</p>
+        </div>
+      </div>
     }
     
     return (
@@ -45,7 +52,7 @@ const MyNotes = ({filedData}) => {
                             filteredData.map(mynote => <NoteCard
                                 key={mynote._id}
                                 mynote={mynote}
-                                refetch={refetch}
+                                callRefetch={callRefetch}
                             ></NoteCard>
                             )
                             :
@@ -59,7 +66,7 @@ const MyNotes = ({filedData}) => {
                     myNotes.map(mynote => <NoteCard
                         key={mynote._id}
                         mynote={mynote}
-                        refetch={refetch}
+                        refetch={refetch()}
                     ></NoteCard>
                     )
                 }

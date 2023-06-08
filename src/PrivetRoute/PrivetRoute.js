@@ -9,7 +9,7 @@ const PrivetRoute = ({children}) => {
     try{
         if(!user?.uid){
             navigate('/login')
-            return
+            // return
         }
     }
     finally{

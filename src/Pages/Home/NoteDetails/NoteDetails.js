@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AiOutlinePushpin, AiOutlineRollback, AiFillPushpin } from "react-icons/ai";
+import { MdContentCopy } from "react-icons/md";
 import './NoteDetails.css'
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
+import { DataContext } from '../../../Context/DataProvider';
 
 
 const NoteDetails = () => {
     const {user} = useContext(AuthContext);
+    const {setCallRefetch} = useContext(DataContext)
     // console.log(user)
     const notes = useLoaderData({})
     const {title, note, _id, pinned} = notes;
@@ -49,6 +52,21 @@ const NoteDetails = () => {
         })
     }
 
+    const copyNote = () => {
+        try{
+            navigator.clipboard.writeText(note)
+        }
+        finally{
+            toast("Note copied", {
+                icon: '🌿',
+                style: {
+                    backgroundColor: 'black',
+                    color: "white"
+                }
+            })
+        }
+    }
+
     return (
         <div className='md:max-w-[900px] md:p-0 p-3 mx-auto'>
             <div className='py-5 flex justify-end'>
@@ -56,6 +74,7 @@ const NoteDetails = () => {
                     <Link to='/'>
                         <button data-tip='Back to home' className='p-2 hover:text-neutral tooltip tooltip-bottom'><AiOutlineRollback></AiOutlineRollback></button>
                     </Link>
+                        <button onClick={copyNote} data-tip='Tap to copy' className='p-2 hover:text-neutral tooltip tooltip-bottom'><MdContentCopy></MdContentCopy></button>
                         {
                         !pinned ?
                             <button onClick={handleClickToPin} data-tip='Tap to Pin this note' className='p-2 hover:text-neutral tooltip tooltip-bottom'>
@@ -73,7 +92,7 @@ const NoteDetails = () => {
                 <h1 className='text-3xl text-neutral font-semibold'>{title}</h1>
                 <div className="mt-3">
                 <span className='font-bold uppercase mr-2 text-black ' >Note:</span>  <br />
-                <p className=' text-neutral text-md break-words'>
+                <p className='text-neutral mt-5 text-md break-words whitespace-pre-line'>
                     {note}
                 </p>
                 </div>
