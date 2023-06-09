@@ -21,7 +21,7 @@ const NoteDetails = () => {
     // const {data: notes = [], refetch, isLoading} = useQuery({
     //     queryKey: ["notes"],
     //     queryFn: async () => {
-    //         const res = await fetch(`http://localhost:5000/note/${getNoteId}`)
+    //         const res = await fetch(`https://mypaste.vercel.app/note/${getNoteId}`)
     //         const data = res.json()
     //         return data;
     //     }
@@ -39,7 +39,7 @@ const NoteDetails = () => {
     
     const handleClickToPin = () => {
 
-        const url = `http://localhost:5000/pin?id=${notes._id}`
+        const url = `https://mypaste.vercel.app/pin?id=${notes._id}`
         fetch(url, {
             method: "PUT",
             headers: {
@@ -60,7 +60,7 @@ const NoteDetails = () => {
 
 
     const handleRemovePin = () => {
-        const url = `http://localhost:5000/removePin?id=${_id}`
+        const url = `https://mypaste.vercel.app/removePin?id=${_id}`
         fetch(url, {
             method: "PUT"
         })

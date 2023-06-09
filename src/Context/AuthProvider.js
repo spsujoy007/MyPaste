@@ -52,7 +52,7 @@ const AuthProvider = ({children}) => {
     const {data: myNotesTotal = [], refetch, isLoading} = useQuery({
         queryKey: ['myNotesTotal'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/notes`);
+            const res = await fetch(`https://mypaste.vercel.app/notes`);
             const data = await res.json()
             return data
         }
