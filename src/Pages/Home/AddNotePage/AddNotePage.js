@@ -15,6 +15,7 @@ const AddNotePage = () => {
 
     const [notetitle, setNotetitle] = useState('')
     const [noteDetailPreview, setNoteDetailPreview] = useState('')
+    const [defaultTitle, setDefaultTitle] = useState('')
 
     const handleAddNote = (e) => {
         e.preventDefault()
@@ -30,7 +31,7 @@ const AddNotePage = () => {
         }
 
         if(noteLength.length >= 5){
-            const url = `https://mypaste.vercel.app/addnote`;
+            const url = `http://localhost:5000/addnote`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -86,6 +87,7 @@ const AddNotePage = () => {
                 <div className='flex items-center'>
                     <input 
                         name='title'
+                        defaultValue={defaultTitle}
                         onFocus={() => {setFire(true)}}
                         onBlur={() => setFire(false)}
                         onChange={(e) => setNotetitle(e.target.value)}
@@ -100,9 +102,10 @@ const AddNotePage = () => {
                         name="note" 
                         onChange={(e) => {
                             setNoteLength(e.target.value)
+                            setDefaultTitle(e.target.value.slice(0, 25))
                             setNoteDetailPreview(e.target.value)
                         }}
-                     className='mt-2 overflow-hidden border-primary w-full p-3 outline-none rounded-t-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
+                     className='mt-2 whitespace-pre-line caret-primary overflow-hidden border-primary w-full p-3 outline-none rounded-t-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
                     </textarea>
                     
                 </div>

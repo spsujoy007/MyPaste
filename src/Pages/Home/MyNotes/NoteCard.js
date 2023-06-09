@@ -20,7 +20,7 @@ const NoteCard = ({mynote, callRefetch}) => {
         }
         finally{
             toast.success(`${title.slice(0,15)} COPIED!`)
-            const url = `https://mypaste.vercel.app/copiedCount?id=${_id}`
+            const url = `http://localhost:5000/copiedCount?id=${_id}`
             fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -37,7 +37,7 @@ const NoteCard = ({mynote, callRefetch}) => {
 
     const handleDeleteNote = (id) => {
         setLoading(true)
-        fetch(`https://mypaste.vercel.app/deletenote?id=${id}`, {
+        fetch(`http://localhost:5000/deletenote?id=${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -46,6 +46,7 @@ const NoteCard = ({mynote, callRefetch}) => {
                 toast.success(`${title.slice(0, 15)}... is deleted`);
                 callRefetch()
                 // setCallRefetch(refetch)
+                setCallRefetch(true)
                 setLoading(false)
             }
         })
