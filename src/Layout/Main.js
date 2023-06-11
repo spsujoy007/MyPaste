@@ -101,12 +101,15 @@ const Main = () => {
     </div>
     :
     <div>
-      <Link to='/'>
+      
       <button>
           <h2 className='text-xl font-bold mb-6 text-neutral p-2 '>MyPaste</h2>
-        </button>
-        <h2 className='text-neutral text-xl p-3 bg-white rounded-xl'>Hey devs! Please login first.</h2>
-      </Link>
+      </button>
+        <div className='p-3 bg-white rounded-xl'>
+            <h2 className='text-neutral text-md'>Hey devs! Please <span className='font-bold'>login</span> first. Then start copy and pasting!</h2>
+            <Link to='/login'><button className='bg-primary w-full py-1 capitalize rounded-md hover:bg-black duration-300 text-white text-sm mt-5'>login</button></Link>
+        </div>
+        
     </div>
     }
     

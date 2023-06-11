@@ -6,7 +6,7 @@ import './NoteCard.css'
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../../../Context/DataProvider';
 
-const NoteCard = ({mynote, callRefetch}) => {
+const NoteCard = ({mynote, callRefetch, index}) => {
     const {setCallRefetch} = useContext(DataContext)
 
     const {title, _id, note} = mynote;
@@ -53,7 +53,8 @@ const NoteCard = ({mynote, callRefetch}) => {
     }
 
     return (
-        <div className='rounded-xl  bg-secondary hover:bg-white hover:shadow-xl shadow-primary hover:scale-[1.01] duration-1000'>
+        <div className={`rounded-3xl ${index === 0 ? "bg-white": "bg-secondary" } noteCard hover:bg-white hover:shadow-xl shadow-primary hover:scale-[1.01] duration-500`}>
+            <div className='noteCard'>
             <div onClick={() => navigate(`/note/${_id}`)} className="h-[150px] overflow-hidden">
             <div data-tip='Click to copy' onClick={() => {
                 clickToCopy(_id)
@@ -92,6 +93,7 @@ const NoteCard = ({mynote, callRefetch}) => {
                     setTimeout(() => setButtonCopy(false), 3000)
                     }} className='text-neutral flex gap-2 uppercase'><BiCopy className='text-2xl'></BiCopy> {buttonCopy ? 'copied': 'copy'}
                 </button>
+            </div>
             </div>
         </div>
     );

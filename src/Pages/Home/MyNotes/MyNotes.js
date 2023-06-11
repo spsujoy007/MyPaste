@@ -49,9 +49,10 @@ const MyNotes = ({filedData}) => {
                     <>
                         {
                             filteredData.length > 0 ?
-                            filteredData.map(mynote => <NoteCard
+                            filteredData.map((mynote, i) => <NoteCard
                                 key={mynote._id}
                                 mynote={mynote}
+                                index={i}
                                 callRefetch={callRefetch}
                             ></NoteCard>
                             )
