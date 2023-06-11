@@ -109,9 +109,9 @@ const NoteDetails = () => {
                     icon: "👌",
                     backgroundColor: 'primary'
                 })
-                // window.location.reload()
                 refetch()
                 setEditForm(false)
+                setCallRefetch(true)
             }
         })
     }
