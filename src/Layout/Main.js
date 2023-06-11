@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineLogout, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineMenu, AiOutlinePlus } from "react-icons/ai";
 import PinnedNote from '../Pages/Home/PinnedNote/PinnedNote';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Context/AuthProvider';
@@ -10,12 +10,13 @@ const Main = () => {
   const theme = localStorage.getItem('currentTheme')
 
   const {user, logout, fieldValue} = useContext(AuthContext)
+  const userData = JSON.parse(localStorage.getItem('userdata'))
   const locations = useLocation()
 
   const {data: myNotesTotal = [], refetch, isLoading} = useQuery({
     queryKey: ['myNotesTotal'],
     queryFn: async () => {
-        const res = await fetch(`http://localhost:5000/notes?email=${user?.email}`);
+        const res = await fetch(`https://mypaste.vercel.app/notes?email=${user?.email}`);
         const data = await res.json()
         return data
     }
@@ -63,17 +64,19 @@ const Main = () => {
   </div> 
   <div className="drawer-side " >
     <label htmlFor="siteDashBoard" className="drawer-overlay"></label> 
-    <div className='p-4 w-80 bg-secondary'>
+    <div className='p-4 w-[80%] md:w-80 bg-secondary'>
     {/* information */}
     {
-      user?.email ?
+      userData?.email ?
       <div>
+        
         <Link to='/'>
         <button className='flex items-center gap-x-2 mb-5'>
-          <img className='w-10' src="https://i.ibb.co/mRLgz9L/logoMP.png" alt="" />
-          <h2 className='text-xl font-bold text-neutral'>MyPaste</h2>
+            <img className='w-10' src="https://i.ibb.co/mRLgz9L/logoMP.png" alt="" />
+            <h2 className='text-xl font-bold text-neutral'>MyPaste</h2>
         </button>
         </Link>
+
         <div className='flex justify-between items-center text-neutral gap-x-2 bg-white p-3 rounded-xl'>
             <div className='flex items-start gap-x-2'>
             <Link to="/myprofile">

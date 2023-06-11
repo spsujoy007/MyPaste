@@ -23,7 +23,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/note/:id',
-                loader: async ({params}) => fetch(`http://localhost:5000/note/${params.id}`),
+                loader: async ({params}) => fetch(`https://mypaste.vercel.app/note/${params.id}`),
                 element: <PrivetRoute><NoteDetails></NoteDetails></PrivetRoute>
             },
             {

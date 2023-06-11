@@ -15,7 +15,8 @@ const NoteDetails = () => {
     const {user} = useContext(AuthContext);
     const {setCallRefetch, callRefetch} = useContext(DataContext)
     const [editForm, setEditForm] = useState(false)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const [saveFormLoad, setSaveFormLoad] = useState(false) //when click on the save after edit note (loading!)
 
 
     const notes = useLoaderData({})
@@ -24,7 +25,7 @@ const NoteDetails = () => {
     const {data: singleNote = {}, isLoading, refetch} = useQuery({
         queryKey: ["singleNote"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/singlenote?id=${_id}`);
+            const res = await fetch(`https://mypaste.vercel.app/singlenote?id=${_id}`);
             const data = res.json()
             setLoading(false)
             return data 
@@ -37,7 +38,7 @@ const NoteDetails = () => {
     
     const handleClickToPin = () => {
 
-        const url = `http://localhost:5000/pin?id=${notes._id}`
+        const url = `https://mypaste.vercel.app/pin?id=${notes._id}`
         fetch(url, {
             method: "PUT",
             headers: {
@@ -58,7 +59,7 @@ const NoteDetails = () => {
 
 
     const handleRemovePin = () => {
-        const url = `http://localhost:5000/removePin?id=${_id}`
+        const url = `https://mypaste.vercel.app/removePin?id=${_id}`
         fetch(url, {
             method: "PUT"
         })
@@ -91,10 +92,11 @@ const NoteDetails = () => {
 
     const handleUpdateNote = (e) => {
         e.preventDefault()
+        setSaveFormLoad(true)
         const form = e.target;
         const title = form.title.value;
         const note = form.note.value;
-        fetch(`http://localhost:5000/editnote?id=${_id}`, {
+        fetch(`https://mypaste.vercel.app/editnote?id=${_id}`, {
             method: 'POST',
             headers: {
                 "content-type": 'application/json',
@@ -112,9 +114,11 @@ const NoteDetails = () => {
                 refetch()
                 setEditForm(false)
                 setCallRefetch(true)
+                setSaveFormLoad(false)
             }
         })
     }
+    
 
 
     return (
@@ -157,9 +161,9 @@ const NoteDetails = () => {
                 editForm ?
 
                 <form onSubmit={handleUpdateNote}>
-                <div className='bg-accent caret-primary p-5 rounded-t-xl shadowNote '>
+                <div className='bg-accent caret-primary p-5 rounded-t-xl border-2 border-primary '>
 
-                    <input name='title' className='text-3xl w-full bg-accent caret-primary text-neutral font-semibold outline-none cursor-text' type="text" defaultValue={title} placeholder='title' />
+                    <input name='title' className='md:text-3xl text-lg w-full bg-accent caret-primary text-neutral font-semibold outline-none cursor-text' type="text" defaultValue={title} placeholder='title' />
 
                     <div className="mt-5">
                         <span className='font-bold uppercase mr-2 text-primary' >Note:</span>  <br />
@@ -170,7 +174,12 @@ const NoteDetails = () => {
 
 
                 <div>
-                    <button type='submit' className='text-xl bg-primary hover:bg-secondary duration-200 text-white rounded-b-md py-1 px-5 w-full'>Save</button>
+                    {
+                        saveFormLoad ?
+                        <button type='submit' className='text-xl bg-primary loading hover:bg-secondary duration-200 text-white rounded-b-md py-1 px-5 w-full'>Saving...</button>
+                        :
+                        <button type='submit' className='text-xl bg-primary hover:bg-secondary duration-200 text-white rounded-b-md py-1 px-5 w-full'>Save</button>
+                    }
                 </div>
 
                 <div className='flex items-center justify-end text-red-500 md:mr-3 gap-2 mt-2'>

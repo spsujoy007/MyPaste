@@ -26,7 +26,7 @@ const AddNote = ({filedData}) => {
                     setSearchField(e.target.value)
                     setFieldValue(e.target.value)
                     handleCustomTheme(e.target.value)
-                }} className='input input-bordered w-full text-primary border-primary' placeholder='search here...'/>
+                }} className='input input-bordered bg-[#f0f0f0] w-full text-primary border-primary' placeholder='search here...'/>
 
                 <button onClick={() => setSearchField('')} className='text-primary font-bold -ml-12 rounded-md p-4 '><RxCross2></RxCross2></button>
                 </div>
