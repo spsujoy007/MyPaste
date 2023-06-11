@@ -1,9 +1,0 @@
-.noteCard::before{
-    content: '';
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 300px;
-    background: #000;
-    border-radius: 100%;
-}

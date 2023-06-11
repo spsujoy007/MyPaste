@@ -63,7 +63,7 @@ const NoteCard = ({mynote, callRefetch, index}) => {
                 }} className='bg-neutral tooltip tooltip-top w-full text-left hover:cursor-pointer rounded-t-xl text-white p-2'> 
                 <h4>{title.length ? title.slice(0,32) : note.slice(0,32)}</h4>
             </div>
-            <div className='p-2 text-neutral '>
+            <div className='p-2 text-neutral cardnote'>
                 <p onClick={() => navigate(`/note/${_id}`)}>
                     {note.length > 125 ? <p>{note.slice(0, 125)}...</p> : note}
                 </p>

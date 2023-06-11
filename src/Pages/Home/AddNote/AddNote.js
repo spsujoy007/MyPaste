@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BiCommentAdd } from "react-icons/bi";
 import { AiOutlineMenu } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
@@ -20,11 +21,16 @@ const AddNote = ({filedData}) => {
         <div>
             <div className=' flex items-center
              gap-x-2'>
+                <div className='flex items-center w-full'>
                 <input type="text" value={searchField} onChange={(e) => {
                     setSearchField(e.target.value)
                     setFieldValue(e.target.value)
                     handleCustomTheme(e.target.value)
                 }} className='input input-bordered w-full text-primary border-primary' placeholder='search here...'/>
+
+                <button onClick={() => setSearchField('')} className='text-primary font-bold -ml-12 rounded-md p-4 '><RxCross2></RxCross2></button>
+                </div>
+
                 <div className='hidden md:block'>
                     <Link to='/addnote'>
                     <div>
