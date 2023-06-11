@@ -24,7 +24,7 @@ const AddNote = ({filedData}) => {
                     setSearchField(e.target.value)
                     setFieldValue(e.target.value)
                     handleCustomTheme(e.target.value)
-                }} className='input input-bordered w-full border-primary' placeholder='search here...'/>
+                }} className='input input-bordered w-full text-primary border-primary' placeholder='search here...'/>
                 <div className='hidden md:block'>
                     <Link to='/addnote'>
                     <div>

@@ -12,7 +12,7 @@ const MyNotes = ({filedData}) => {
     const {data: myNotes = [], refetch, isLoading} = useQuery({
         queryKey: ['myNotes'],
         queryFn: async () => {
-            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user.email}`);
+            const res = await fetch(`http://localhost:5000/notes?email=${user.email}`);
             const data = await res.json()
             return data
         }
@@ -43,7 +43,7 @@ const MyNotes = ({filedData}) => {
         <div className='mt-10'>
             {
                  myNotes.length  > 0 ?
-            <div className={`grid lg:grid-cols-3 grid-cols-1 gap-3`}>
+            <div className={`grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-3`}>
                 {
                     filteredData ?
                     <>

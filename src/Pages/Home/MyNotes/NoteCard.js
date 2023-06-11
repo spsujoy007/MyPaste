@@ -20,7 +20,7 @@ const NoteCard = ({mynote, callRefetch}) => {
         }
         finally{
             toast.success(`${title.slice(0,15)} COPIED!`)
-            const url = `https://mypaste.vercel.app/copiedCount?id=${_id}`
+            const url = `http://localhost:5000/copiedCount?id=${_id}`
             fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -37,7 +37,7 @@ const NoteCard = ({mynote, callRefetch}) => {
 
     const handleDeleteNote = (id) => {
         setLoading(true)
-        fetch(`https://mypaste.vercel.app/deletenote?id=${id}`, {
+        fetch(`http://localhost:5000/deletenote?id=${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -53,7 +53,7 @@ const NoteCard = ({mynote, callRefetch}) => {
     }
 
     return (
-        <div className='rounded-xl  bg-secondary'>
+        <div className='rounded-xl  bg-secondary hover:bg-white hover:shadow-xl shadow-primary hover:scale-[1.01] duration-1000'>
             <div onClick={() => navigate(`/note/${_id}`)} className="h-[150px] overflow-hidden">
             <div data-tip='Click to copy' onClick={() => {
                 clickToCopy(_id)
@@ -62,7 +62,7 @@ const NoteCard = ({mynote, callRefetch}) => {
                 }} className='bg-neutral tooltip tooltip-top w-full text-left hover:cursor-pointer rounded-t-xl text-white p-2'> 
                 <h4>{title.length ? title.slice(0,32) : note.slice(0,32)}</h4>
             </div>
-            <div className='p-2 text-neutral text-justify'>
+            <div className='p-2 text-neutral '>
                 <p onClick={() => navigate(`/note/${_id}`)}>
                     {note.length > 125 ? <p>{note.slice(0, 125)}...</p> : note}
                 </p>
@@ -72,7 +72,7 @@ const NoteCard = ({mynote, callRefetch}) => {
             <div className="flex justify-between p-2 rounded-b-xl">
             <div className="dropdown dropdown-top dropdown-start">
                 <label tabIndex={0}>
-                    <button  className=''>
+                    <button className=''>
                         <AiFillDelete className='text-primary text-2xl'></AiFillDelete>
                     </button>
                 </label>

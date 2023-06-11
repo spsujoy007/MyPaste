@@ -31,7 +31,7 @@ const AddNotePage = () => {
         }
 
         if(noteLength.length >= 5){
-            const url = `https://mypaste.vercel.app/addnote`;
+            const url = `http://localhost:5000/addnote`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -66,8 +66,8 @@ const AddNotePage = () => {
 
                     {/* preview of note start */}
                     {/* The button to open modal */}
-                    <label htmlFor="modal-preview" className="p-2 cursor-pointer hover:text-neutral tooltip tooltip-left">
-                        <AiOutlineEye></AiOutlineEye>
+                    <label htmlFor={`${noteDetailPreview && "modal-preview"}`} className="p-2 cursor-pointer hover:text-neutral tooltip tooltip-left">
+                        <AiOutlineEye title={`${!noteDetailPreview && "write something"}`}></AiOutlineEye>
                     </label>
 
                     <input type="checkbox" id="modal-preview" className="modal-toggle" />

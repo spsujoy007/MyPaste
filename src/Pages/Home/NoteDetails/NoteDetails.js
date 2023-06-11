@@ -15,16 +15,29 @@ const NoteDetails = () => {
     const {user} = useContext(AuthContext);
     const {setCallRefetch, callRefetch} = useContext(DataContext)
     const [editForm, setEditForm] = useState(false)
+    const [loading, setLoading] = useState(true)
 
 
     const notes = useLoaderData({})
-    const {title, note, _id, pinned} = notes;
+    const {_id} = notes;
+
+    const {data: singleNote = {}, isLoading, refetch} = useQuery({
+        queryKey: ["singleNote"],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/singlenote?id=${_id}`);
+            const data = res.json()
+            setLoading(false)
+            return data 
+        }
+    })
+    const {title, note, pinned} = singleNote;
+
 
 
     
     const handleClickToPin = () => {
 
-        const url = `https://mypaste.vercel.app/pin?id=${notes._id}`
+        const url = `http://localhost:5000/pin?id=${notes._id}`
         fetch(url, {
             method: "PUT",
             headers: {
@@ -45,7 +58,7 @@ const NoteDetails = () => {
 
 
     const handleRemovePin = () => {
-        const url = `https://mypaste.vercel.app/removePin?id=${_id}`
+        const url = `http://localhost:5000/removePin?id=${_id}`
         fetch(url, {
             method: "PUT"
         })
@@ -81,7 +94,7 @@ const NoteDetails = () => {
         const form = e.target;
         const title = form.title.value;
         const note = form.note.value;
-        fetch(`https://mypaste.vercel.app/editnote?id=${_id}`, {
+        fetch(`http://localhost:5000/editnote?id=${_id}`, {
             method: 'POST',
             headers: {
                 "content-type": 'application/json',
@@ -96,7 +109,8 @@ const NoteDetails = () => {
                     icon: "👌",
                     backgroundColor: 'primary'
                 })
-                window.location.reload()
+                // window.location.reload()
+                refetch()
                 setEditForm(false)
             }
         })
@@ -105,7 +119,12 @@ const NoteDetails = () => {
 
     return (
         <div className='md:max-w-[900px] md:p-0 p-3 mx-auto'>
-            <div className='py-5 flex justify-end'>
+            {
+                loading ?
+                <LoaderCustom></LoaderCustom>
+                :
+                <>
+                    <div className='py-5 flex justify-end'>
                 <div className='text-2xl text-primary flex gap-2 items-center'>
                     <Link to='/'>
                         <button data-tip='Back to home' className='p-2 hover:text-neutral tooltip tooltip-bottom'><AiOutlineRollback></AiOutlineRollback></button>
@@ -140,7 +159,7 @@ const NoteDetails = () => {
                 <form onSubmit={handleUpdateNote}>
                 <div className='bg-accent caret-primary p-5 rounded-t-xl shadowNote '>
 
-                    <input name='title' className='text-3xl bg-accent caret-primary text-neutral font-semibold outline-none cursor-text' type="text" defaultValue={title} placeholder='title' />
+                    <input name='title' className='text-3xl w-full bg-accent caret-primary text-neutral font-semibold outline-none cursor-text' type="text" defaultValue={title} placeholder='title' />
 
                     <div className="mt-5">
                         <span className='font-bold uppercase mr-2 text-primary' >Note:</span>  <br />
@@ -179,6 +198,8 @@ const NoteDetails = () => {
                 </div>
                }
             </div>
+                </>
+            }
         </div>
     );
 };
