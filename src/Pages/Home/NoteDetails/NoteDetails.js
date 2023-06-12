@@ -34,8 +34,6 @@ const NoteDetails = () => {
     const {title, note, pinned} = singleNote;
 
 
-
-    
     const handleClickToPin = () => {
 
         const url = `http://localhost:5000/pin?id=${notes._id}`
@@ -158,13 +156,13 @@ const NoteDetails = () => {
             </div>
 
             <div>
-                    <div className='flex justify-end my-3'>
-                        <p className='text-neutral'>Just click the title or note to edit</p>
-                    </div>
                {
                 editForm ?
 
                 <form onSubmit={handleUpdateNote}>
+                    <div className='flex justify-end my-3'>
+                        <p className='text-neutral'>Just click the title or note to edit</p>
+                    </div>
                 <div className='bg-accent caret-primary p-5 rounded-t-xl border-2 border-primary '>
 
                     <input name='title' className='md:text-3xl text-lg w-full bg-accent caret-primary text-neutral font-semibold outline-none cursor-text' type="text" defaultValue={title} placeholder='title' />
@@ -172,7 +170,7 @@ const NoteDetails = () => {
                     <div className="mt-5">
                         <span className='font-bold uppercase mr-2 text-primary' >Note:</span>  <br />
                         
-                        <textarea name="note" placeholder='type your note...' className='bg-accent caret-primary text-neutral cursor-text p-3 mt-3 outline-none text-md break-words whitespace-pre-line w-full min-h-[300px]' type="text" defaultValue={note} />
+                        <textarea name="note" placeholder='type your note...' className=' caret-primary text-white rounded-xl cursor-text p-5 mt-3 outline-none text-md break-words bg-neutral whitespace-pre-line w-full min-h-[400px]' type="text" defaultValue={note} />
                     </div>
                 </div>
 

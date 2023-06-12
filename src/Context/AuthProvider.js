@@ -42,7 +42,7 @@ const AuthProvider = ({children}) => {
         return () =>{
             unSubscribe()
         }
-    }, [])
+    }, [user])
 
     const logout = () => {
         setLoading(true)

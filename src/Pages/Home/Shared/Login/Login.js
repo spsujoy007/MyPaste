@@ -22,9 +22,10 @@ const Login = () => {
         const password = form.password.value;
         login(email, password)
         .then(result => {
-            const user = result.user;
+            const user = result?.user;
             if(user?.email){
                 toast.success(`Welcome ${user.displayName}`)
+                handleAddNote(user?.email)
                 navigate('/')
             }
         })
@@ -36,10 +37,46 @@ const Login = () => {
         const handleGoogleSign = () => {
             googleSign()
             .then(result => {
+                const user = result?.user
                 if(result){
-                    toast.success(`Welcome ${user.displayName}`)
+                    handleAddNote(user?.email)
+                    toast.success(`Welcome ${user?.displayName}`)
                     navigate('/')
                 }
+            })
+        }
+
+        function handleAddNote (userEmail){
+
+            const notebody = {
+                title: "🦄 Search themes",
+                note: `
+    You can change the theme of the website. 💖
+    
+    #️⃣ The process is when you type on the search bar using these commands: 
+    1. cl_bluedream
+    2. cl_blackberry
+    3. cl_redbull
+    4. cl_teal
+    
+                    If you want to back to the default theme just type "default"
+    
+                    Hope you enjoy it! Thank you so much for using "MyPaste"
+                `,
+                email: userEmail,
+                copied_count: 0
+            }
+            const url = `http://localhost:5000/addnote`;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(notebody)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
             })
         }
 
