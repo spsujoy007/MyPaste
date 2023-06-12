@@ -31,7 +31,7 @@ const AddNotePage = () => {
         }
 
         if(noteLength.length >= 5){
-            const url = `https://mypaste.vercel.app/addnote`;
+            const url = `http://localhost:5000/addnote`;
         fetch(url, {
             method: 'POST',
             headers: {

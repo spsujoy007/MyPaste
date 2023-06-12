@@ -9,10 +9,12 @@ const PrivetRoute =  ({children}) => {
 
     const navigate = useNavigate()
     
-        if(!userData?.email){
-            navigate('/login')
+        try{
+            if(!userData?.email){
+                navigate('/login')
+            }
         }
-        else{
+        finally{
             return children
         }
     

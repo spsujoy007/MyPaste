@@ -25,7 +25,7 @@ const NoteDetails = () => {
     const {data: singleNote = {}, isLoading, refetch} = useQuery({
         queryKey: ["singleNote"],
         queryFn: async () => {
-            const res = await fetch(`https://mypaste.vercel.app/singlenote?id=${_id}`);
+            const res = await fetch(`http://localhost:5000/singlenote?id=${_id}`);
             const data = res.json()
             setLoading(false)
             return data 
@@ -38,7 +38,7 @@ const NoteDetails = () => {
     
     const handleClickToPin = () => {
 
-        const url = `https://mypaste.vercel.app/pin?id=${notes._id}`
+        const url = `http://localhost:5000/pin?id=${notes._id}`
         fetch(url, {
             method: "PUT",
             headers: {
@@ -50,7 +50,9 @@ const NoteDetails = () => {
         .then(data => {
             console.log(data)
             if(data){
-                window.location.reload()
+                // window.location.reload()
+                refetch()
+                setCallRefetch(true)
                 toast.success(`${title.slice(0, 15)}... is pinned`)
             }
         })
@@ -59,7 +61,7 @@ const NoteDetails = () => {
 
 
     const handleRemovePin = () => {
-        const url = `https://mypaste.vercel.app/removePin?id=${_id}`
+        const url = `http://localhost:5000/removePin?id=${_id}`
         fetch(url, {
             method: "PUT"
         })
@@ -67,7 +69,9 @@ const NoteDetails = () => {
         .then(data => {
             console.log(data)
             if(data){
-                window.location.reload()
+                // window.location.reload()
+                refetch()
+                setCallRefetch(true)
                 toast.success(`${title.slice(0, 12)}... is unpinned`)
             }
         })
@@ -96,7 +100,7 @@ const NoteDetails = () => {
         const form = e.target;
         const title = form.title.value;
         const note = form.note.value;
-        fetch(`https://mypaste.vercel.app/editnote?id=${_id}`, {
+        fetch(`http://localhost:5000/editnote?id=${_id}`, {
             method: 'POST',
             headers: {
                 "content-type": 'application/json',
