@@ -12,7 +12,7 @@ const MyNotes = ({filedData}) => {
     const {data: myNotes = [], refetch, isLoading} = useQuery({
         queryKey: ['myNotes'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/notes?email=${user.email}`);
+            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user.email}`);
             const data = await res.json()
             return data
         }

@@ -26,7 +26,7 @@ const NoteDetails = () => {
     const {data: singleNote = {}, isLoading, refetch} = useQuery({
         queryKey: ["singleNote"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/singlenote?id=${_id}`);
+            const res = await fetch(`https://mypaste.vercel.app/singlenote?id=${_id}`);
             const data = res.json()
             setLoading(false)
             return data 
@@ -37,7 +37,7 @@ const NoteDetails = () => {
 
     const handleClickToPin = () => {
 
-        const url = `http://localhost:5000/pin?id=${notes._id}`
+        const url = `https://mypaste.vercel.app/pin?id=${notes._id}`
         fetch(url, {
             method: "PUT",
             headers: {
@@ -60,7 +60,7 @@ const NoteDetails = () => {
 
 
     const handleRemovePin = () => {
-        const url = `http://localhost:5000/removePin?id=${_id}`
+        const url = `https://mypaste.vercel.app/removePin?id=${_id}`
         fetch(url, {
             method: "PUT"
         })
@@ -99,7 +99,7 @@ const NoteDetails = () => {
         const form = e.target;
         const title = form.title.value;
         const note = form.note.value;
-        fetch(`http://localhost:5000/editnote?id=${_id}`, {
+        fetch(`https://mypaste.vercel.app/editnote?id=${_id}`, {
             method: 'POST',
             headers: {
                 "content-type": 'application/json',
@@ -125,7 +125,7 @@ const NoteDetails = () => {
 
     const handleDeleteNote = () => {
         setLoading(true)
-        fetch(`http://localhost:5000/deletenote?id=${_id}`, {
+        fetch(`https://mypaste.vercel.app/deletenote?id=${_id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -187,7 +187,7 @@ const NoteDetails = () => {
 
                 <form onSubmit={handleUpdateNote}>
                     <div className='flex justify-end my-3'>
-                        <p className='text-neutral'>Just click the title or note to edit</p>
+                        <p className='text-neutral'>Just click the <span className='font-bold'>title</span> or <span className='font-bold'>note</span> to edit</p>
                     </div>
                 <div className='bg-accent caret-primary p-5 rounded-t-xl border-2 border-primary '>
 
@@ -196,7 +196,7 @@ const NoteDetails = () => {
                     <div className="mt-5">
                         <span className='font-bold uppercase mr-2 text-primary' >Note:</span>  <br />
                         
-                        <textarea name="note" placeholder='type your note...' className=' caret-primary text-white rounded-xl cursor-text p-5 mt-3 outline-none text-md break-words bg-neutral whitespace-pre-line w-full min-h-[400px]' type="text" defaultValue={note} />
+                        <textarea name="note" placeholder='type your note...' className=' caret-red-500 text-white rounded-xl cursor-text p-5 mt-3 outline-none text-md break-words bg-neutral whitespace-pre-line w-full min-h-[400px]' type="text" defaultValue={note} />
                     </div>
                 </div>
 

@@ -66,7 +66,7 @@ const Login = () => {
                 email: userEmail,
                 copied_count: 0
             }
-            const url = `http://localhost:5000/addnote`;
+            const url = `https://mypaste.vercel.app/addnote`;
             fetch(url, {
                 method: 'POST',
                 headers: {
