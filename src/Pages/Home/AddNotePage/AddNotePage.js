@@ -41,10 +41,11 @@ const AddNotePage = () => {
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             if(data.acknowledged){
                 navigator.clipboard.writeText(note)
                 toast.success('Note copied')
-                navigate('/')
+                navigate(`/note/${data.insertedId}`)
                 setLoading(false)
             }
         })

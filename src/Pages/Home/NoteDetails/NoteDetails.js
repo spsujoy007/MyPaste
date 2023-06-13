@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useHistory, useNavigate } from 'react-router-dom';
 import { AiOutlinePushpin, AiOutlineRollback, AiFillPushpin } from "react-icons/ai";
 import { MdContentCopy } from "react-icons/md";
 import './NoteDetails.css'
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
 import { DataContext } from '../../../Context/DataProvider';
-import { RiEdit2Line } from "react-icons/ri";
+import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { useQuery } from '@tanstack/react-query';
 import LoaderCustom from '../../../Components/LoaderCustom';
 
@@ -17,6 +17,7 @@ const NoteDetails = () => {
     const [editForm, setEditForm] = useState(false)
     const [loading, setLoading] = useState(true);
     const [saveFormLoad, setSaveFormLoad] = useState(false) //when click on the save after edit note (loading!)
+    const navigate = useNavigate()
 
 
     const notes = useLoaderData({})
@@ -122,6 +123,22 @@ const NoteDetails = () => {
     }
     
 
+    const handleDeleteNote = () => {
+        setLoading(true)
+        fetch(`http://localhost:5000/deletenote?id=${_id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.deletedCount > 0){
+                setLoading(false)
+                toast.success(`${title.slice(0, 15)}... is deleted`);
+                setCallRefetch(true)
+                navigate('/')
+            }
+        })
+    }
+
 
     return (
         <div className='md:max-w-[900px] md:p-0 p-3 mx-auto'>
@@ -141,6 +158,15 @@ const NoteDetails = () => {
                         
                         {/* click to edit  */}
                         <button onClick={() => setEditForm(!editForm)} data-tip='Tap to edit note' className='p-2 hover:text-neutral tooltip tooltip-bottom'><RiEdit2Line></RiEdit2Line></button>
+
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex={0}>
+                                <button data-tip='Tap to delete note' className='p-2 hover:text-neutral tooltip tooltip-bottom'><RiDeleteBinLine></RiDeleteBinLine></button>
+                            </label>
+                            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                              <li className='text-xl'><button onClick={handleDeleteNote}>Delete</button></li>
+                            </ul>
+                        </div>
 
                         {
                         !pinned ?
