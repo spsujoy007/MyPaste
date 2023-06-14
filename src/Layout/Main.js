@@ -95,7 +95,16 @@ const Main = () => {
             </div>
             </div>
             <div data-tip="Tap to logout" className='p-3 tooltip tooltip-left flex items-center'>
-                <button  onClick={handleSignOut}><AiOutlineLogout className={`text-xl text-primary `}></AiOutlineLogout></button>
+                <div className="dropdown dropdown-end">
+                  <label tabIndex={0}>
+                    <button><AiOutlineLogout className={`text-xl text-primary `}></AiOutlineLogout></button>
+                  </label>
+                  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li>
+                      <button className='hover:bg-secondary' onClick={handleSignOut}>Logout</button>
+                    </li>
+                  </ul>
+                </div>
             </div>
         </div>
         <ul className="menu  text-base-content mt-10">

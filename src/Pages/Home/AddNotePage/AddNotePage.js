@@ -3,6 +3,7 @@ import { AiOutlineEye, AiOutlineFileAdd, AiOutlineRollback } from "react-icons/a
 import { Link, useNavigate } from 'react-router-dom';
 import { } from "react-icons/ai";
 import { toast } from 'react-hot-toast';
+import './Addnotepage.css' //css
 import { AuthContext } from '../../../Context/AuthProvider';
 // import fireimg from '../../../../public/images/fire.gif'
 
@@ -92,7 +93,8 @@ const AddNotePage = () => {
                         onFocus={() => {setFire(true)}}
                         onBlur={() => setFire(false)}
                         onChange={(e) => setNotetitle(e.target.value)}
-                       type="text" placeholder='title' className='w-full text-xl text-primary p-3 outline-none border-l-4 border-primary'/> 
+                       type="text" placeholder='Title: ' className='w-full text-sm text-primary p-3 outline-none rounded-t-lg border-b-[1px] border-primary 
+                        '/> 
                     {
                         fire && <img className='w-[35px] -ml-10 -mt-3' src='https://i.gifer.com/5Mz4.gif' alt="fire" />
                     }
@@ -106,7 +108,7 @@ const AddNotePage = () => {
                             setDefaultTitle(e.target.value.slice(0, 25))
                             setNoteDetailPreview(e.target.value)
                         }}
-                     className='mt-2 whitespace-pre-line caret-primary overflow-hidden border-primary w-full p-3 outline-none rounded-t-md text-primary ' placeholder='write your note champion...' id="" cols="30" rows="13">
+                     className='mt-1 whitespace-pre-line caret-primary overflow-hidden border-primary w-full p-3 outline-none  text-primary noteBody' placeholder='write your note champion...' id="" cols="30" rows="13">
                     </textarea>
                     
                 </div>
