@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData, useLocation, useHistory, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { AiOutlinePushpin, AiOutlineRollback, AiFillPushpin } from "react-icons/ai";
 import { MdContentCopy } from "react-icons/md";
 import './NoteDetails.css'
 import { toast } from 'react-hot-toast';
-import { AuthContext } from '../../../Context/AuthProvider';
 import { DataContext } from '../../../Context/DataProvider';
 import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { useQuery } from '@tanstack/react-query';
@@ -12,8 +11,7 @@ import LoaderCustom from '../../../Components/LoaderCustom';
 
 
 const NoteDetails = () => {
-    const {user} = useContext(AuthContext);
-    const {setCallRefetch, callRefetch} = useContext(DataContext)
+    const {setCallRefetch} = useContext(DataContext)
     const [editForm, setEditForm] = useState(false)
     const [loading, setLoading] = useState(true);
     const [saveFormLoad, setSaveFormLoad] = useState(false) //when click on the save after edit note (loading!)
@@ -23,7 +21,7 @@ const NoteDetails = () => {
     const notes = useLoaderData({})
     const {_id} = notes;
 
-    const {data: singleNote = {}, isLoading, refetch} = useQuery({
+    const {data: singleNote = {}, refetch} = useQuery({
         queryKey: ["singleNote"],
         queryFn: async () => {
             const res = await fetch(`https://mypaste.vercel.app/singlenote?id=${_id}`);

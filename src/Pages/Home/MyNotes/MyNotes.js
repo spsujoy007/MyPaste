@@ -44,7 +44,7 @@ const MyNotes = ({filedData}) => {
         <div className='mt-10'>
             {
                  myNotes.length  > 0 ?
-            <div className={`grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-3`}>
+            <div className={`grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-5`}>
                 {
                     filteredData ?
                     <>

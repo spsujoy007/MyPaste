@@ -6,7 +6,7 @@ import './NoteCard.css'
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../../../Context/DataProvider';
 
-const NoteCard = ({mynote, callRefetch, index}) => {
+const StoredNote = ({mynote, callRefetch, index}) => {
     const {setCallRefetch} = useContext(DataContext)
 
     const {title, _id, note} = mynote;
@@ -53,24 +53,28 @@ const NoteCard = ({mynote, callRefetch, index}) => {
     }
 
     return (
-        <div className={`rounded-3xl overflow-hidden bg-white noteCard hover:bg-white hover:shadow-xl shadow-primary  duration-500`}>
-            <div className='p-3 flex items-start h-[250px]'>
-                <img className='w-[45px] h-[45px] rounded-full mr-[23px]' src={'https://api.dicebear.com/7.x/shapes/svg?seed=Simba'} alt='logo'/>
-                <div>
-                    <h1 onClick={() => {
-                        clickToCopy(_id)
-                        setButtonCopy(true)
-                        setTimeout(() => setButtonCopy(false), 3000)
-                    }} className='text-[20px] font-semibold text-neutral'>{title.length ? title.slice(0,25) : note.slice(0,32)}</h1>
-                    <p className='text-neutral text-sm w-[80%] overflow-hidden'>{note.slice(0, 220)}...</p>
-                </div>
+        <div className={`rounded-3xl ${index === 0 ? "bg-white": "bg-secondary" } noteCard hover:bg-white hover:shadow-xl shadow-primary hover:scale-[1.01] duration-500`}>
+            <div className='noteCard'>
+            <div onClick={() => navigate(`/note/${_id}`)} className="h-[50px] overflow-hidden">
+            <div data-tip='Click to copy' onClick={() => {
+                clickToCopy(_id)
+                setButtonCopy(true)
+                setTimeout(() => setButtonCopy(false), 3000)
+                }} className='bg-neutral tooltip tooltip-top w-full text-left hover:cursor-pointer rounded-t-xl text-white p-2'> 
+                <h4>{title.length ? title.slice(0,32) : note.slice(0,32)}</h4>
             </div>
-            <div className='w-full mt-[13px] flex items-center gap-[2px]'>
+            <div className='p-2 text-neutral cardnote hidden'>
+                <p onClick={() => navigate(`/note/${_id}`)}>
+                    {note.length > 125 ? <p>{note.slice(0, 125)}...</p> : note}
+                </p>
+            </div>
+            </div>
 
-            <div className="dropdown dropdown-top dropdown-start w-1/2 h-[44px] bg-secondary hover:bg-neutral duration-300">
+            <div className="flex justify-between p-2 rounded-b-xl">
+            <div className="dropdown dropdown-top dropdown-start">
                 <label tabIndex={0}>
-                    <button className='flex w-full h-full items-center justify-center text-center'>
-                        <AiFillDelete className='text-white text-2xl'></AiFillDelete>
+                    <button className=''>
+                        <AiFillDelete className='text-primary text-2xl'></AiFillDelete>
                     </button>
                 </label>
                 <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -83,15 +87,16 @@ const NoteCard = ({mynote, callRefetch, index}) => {
                 </ul>
             </div>
 
-            <button onClick={() => {
+                <button onClick={() => {
                     clickToCopy()
                     setButtonCopy(true)
                     setTimeout(() => setButtonCopy(false), 3000)
-                    }} className='text-white h-[44px] flex items-center justify-center gap-2 uppercase bg-secondary hover:bg-neutral duration-300 w-1/2'><BiCopy className='text-2xl'></BiCopy> {buttonCopy ? 'copied': 'copy'}
+                    }} className='text-neutral flex gap-2 uppercase'><BiCopy className='text-2xl'></BiCopy> {buttonCopy ? 'copied': 'copy'}
                 </button>
+            </div>
             </div>
         </div>
     );
 };
 
-export default NoteCard;
+export default StoredNote;
