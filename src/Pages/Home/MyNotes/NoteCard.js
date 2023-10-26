@@ -53,21 +53,23 @@ const NoteCard = ({mynote, callRefetch, index}) => {
     }
 
     return (
-        <div className={`rounded-3xl overflow-hidden bg-white noteCard hover:bg-white hover:shadow-xl shadow-primary  duration-500`}>
-            <div className='p-3 flex items-start h-[250px]'>
-                <img className='w-[45px] h-[45px] rounded-full mr-[23px]' src={'https://api.dicebear.com/7.x/shapes/svg?seed=Simba'} alt='logo'/>
-                <div>
-                    <h1 onClick={() => {
+        <div className={`rounded-3xl overflow-hidden h-[${title.length}] bg-white noteCard hover:bg-white hover:shadow-xl shadow-primary  duration-500`}>
+            <div className='p-3 flex items-start h-[250px]' onClick={() => navigate(`/note/${_id}`)}>
+                    <img  className='w-[48px] p-[2px] border-2 border-neutral h-[48px] rounded-full' src={'https://api.dicebear.com/7.x/shapes/svg?seed=Simba'} alt='logo'/>
+                <div className='ml-[23px]'>
+                    <h1 
+                        data-tip='Click to copy' 
+                        onClick={() => {
                         clickToCopy(_id)
                         setButtonCopy(true)
                         setTimeout(() => setButtonCopy(false), 3000)
-                    }} className='text-[20px] font-semibold text-neutral'>{title.length ? title.slice(0,25) : note.slice(0,32)}</h1>
+                    }} className='text-[20px] tooltip tooltip-bottom text-left font-semibold text-neutral'>{title.length ? title.slice(0,25) : note.slice(0,32)}</h1>
                     <p className='text-neutral text-sm w-[80%] overflow-hidden'>{note.slice(0, 220)}...</p>
                 </div>
             </div>
-            <div className='w-full mt-[13px] flex items-center gap-[2px]'>
 
-            <div className="dropdown dropdown-top dropdown-start w-1/2 h-[44px] bg-secondary hover:bg-neutral duration-300">
+            <div className='w-full mt-[13px] flex items-center gap-[2px] border-t-[2px] border-secondary'>
+            <div className="dropdown dropdown-top dropdown-start w-1/2 h-[44px] bg-secondary hover:bg-neutral duration-300 mt-[2px]">
                 <label tabIndex={0}>
                     <button className='flex w-full h-full items-center justify-center text-center'>
                         <AiFillDelete className='text-white text-2xl'></AiFillDelete>
@@ -87,7 +89,7 @@ const NoteCard = ({mynote, callRefetch, index}) => {
                     clickToCopy()
                     setButtonCopy(true)
                     setTimeout(() => setButtonCopy(false), 3000)
-                    }} className='text-white h-[44px] flex items-center justify-center gap-2 uppercase bg-secondary hover:bg-neutral duration-300 w-1/2'><BiCopy className='text-2xl'></BiCopy> {buttonCopy ? 'copied': 'copy'}
+                    }} className='text-white h-[44px] flex items-center justify-center gap-2 uppercase bg-secondary hover:bg-neutral duration-300 w-1/2 mt-[2px]'><BiCopy className='text-2xl'></BiCopy> {buttonCopy ? 'copied': 'copy'}
                 </button>
             </div>
         </div>
