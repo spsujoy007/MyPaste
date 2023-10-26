@@ -35,6 +35,7 @@ const Main = () => {
   const handleSignOut = () => {
     logout()
     .then(() => {
+      localStorage.removeItem("user_id");
       window.location.reload()
     })
     .catch(e => {

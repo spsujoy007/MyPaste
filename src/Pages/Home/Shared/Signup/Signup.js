@@ -44,6 +44,7 @@ const Signup = () => {
                     if(user.uid){
                         updateProfile(name, pictureURL)
                         handleAddNote(user.email)
+                        localStorage.setItem("user_id", user.uid);
                         toast.success(`Welcome ${user.displayName}`)
                         navigate('/')
                     }
@@ -82,6 +83,7 @@ const Signup = () => {
             const user = result?.user
             console.log(result)
             if(result){
+                localStorage.setItem("user_id", user.uid);
                 toast.success(`Welcome ${user?.displayName}`)
                 handleAddNote(user?.email)
                 navigate('/')
@@ -165,7 +167,7 @@ You can change the theme of the website. 💖
                     <button type='submit' className='mt-6 rounded-full hover:bg-neutral duration-150 py-3 px-5 bg-primary text-white'>
                         Sign up
                     </button>
-                    <h3 className='mt-2 text-primary'>Do you have a account. Please <Link className='text-neutral font-bold' to='/login'>Login</Link></h3>
+                    <h3 className='mt-2 text-primary'>Do you have a account. Please <Link className='text-neutral underline font-bold' to='/login'>Login</Link></h3>
                 </form>
 
 

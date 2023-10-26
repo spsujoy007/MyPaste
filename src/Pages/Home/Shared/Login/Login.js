@@ -26,7 +26,8 @@ const Login = () => {
             if(user?.email){
                 toast.success(`Welcome ${user.displayName}`)
                 handleAddNote(user?.email)
-                navigate('/')
+                localStorage.setItem("user_id", user.uid);
+                navigate('/');
             }
         })
         .catch(e => {
@@ -41,6 +42,7 @@ const Login = () => {
                 if(result){
                     handleAddNote(user?.email)
                     toast.success(`Welcome ${user?.displayName}`)
+                    localStorage.setItem("user_id", user.uid);
                     navigate('/')
                 }
             })
@@ -102,7 +104,7 @@ const Login = () => {
                         Login
                     </button>
                     
-                    <h3 className='mt-2 text-primary'>Do you already have an account. Please <Link className='text-neutral font-bold' to='/signup'>Sign up</Link></h3>
+                    <h3 className='mt-2 text-primary'>Are you new in MyPaste? Please <br/> <Link className='text-neutral underline font-bold' to='/signup'>Sign up</Link></h3>
                 </form>
 
                 <div className='mt-6 flex items-center justify-center md:w-[50%]'>

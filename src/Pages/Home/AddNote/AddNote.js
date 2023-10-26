@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { BiCommentAdd } from "react-icons/bi";
 import { AiOutlineMenu } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddNote = ({filedData}) => {
     const {setFieldValue} = useContext(AuthContext);
     const {searchField, setSearchField} = filedData;
+    const page = useLocation();
+    // console.log('page')
     
     const handleCustomTheme = (themeName) => {
         if(themeName === 'cl_redbull' || themeName === 'cl_blackberry' || themeName === 'default' || themeName === 'cl_bluedream' || themeName === 'cl_teal'){

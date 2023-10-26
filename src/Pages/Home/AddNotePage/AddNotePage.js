@@ -13,10 +13,18 @@ const AddNotePage = () => {
     const [noteLength, setNoteLength] = useState(0);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
+    const userId = localStorage.getItem("user_id");
 
     const [notetitle, setNotetitle] = useState('')
     const [noteDetailPreview, setNoteDetailPreview] = useState('')
     const [defaultTitle, setDefaultTitle] = useState('')
+
+    if(!userId)
+    {
+        // console.log(userId)
+        navigate('/login')
+        window.location.reload()
+    }
 
     const handleAddNote = (e) => {
         e.preventDefault()
