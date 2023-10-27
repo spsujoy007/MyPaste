@@ -53,7 +53,7 @@ const NoteCard = ({mynote, callRefetch, index}) => {
     }
 
     return (
-        <div className={`rounded-3xl overflow-hidden h-[${title.length}] bg-white noteCard hover:bg-white hover:shadow-xl shadow-primary  duration-500`}>
+        <div className={`rounded-3xl overflow-hidden h-[${title.length}] bg-white noteCard  hover:shadow-2xl hover:shadow-secondary  duration-500`}>
             <div className='p-3 flex items-start h-[250px]' onClick={() => navigate(`/note/${_id}`)}>
                     <img  className='w-[48px] p-[2px] border-2 border-neutral h-[48px] rounded-full' src={'https://api.dicebear.com/7.x/shapes/svg?seed=Simba'} alt='logo'/>
                 <div className='ml-[23px]'>
@@ -64,7 +64,7 @@ const NoteCard = ({mynote, callRefetch, index}) => {
                         setButtonCopy(true)
                         setTimeout(() => setButtonCopy(false), 3000)
                     }} className='text-[20px] tooltip tooltip-bottom text-left font-semibold text-neutral'>{title.length ? title.slice(0,25) : note.slice(0,32)}</h1>
-                    <p className='text-neutral text-sm w-[80%] h-[80%] overflow-hidden'>{note.slice(0, 220)}...</p>
+                    <p className='text-neutral text-sm w-[95%] h-[80%] overflow-hidden'>{note.slice(0, 200)}...</p>
                 </div>
             </div>
 
