@@ -11,12 +11,13 @@ const Main = () => {
 
   const {user, logout, fieldValue} = useContext(AuthContext)
   const userData = JSON.parse(localStorage.getItem('userdata'))
+  const getuid = localStorage.getItem("user_id");
   const locations = useLocation()
 
   const {data: myNotesTotal = [], refetch, isLoading} = useQuery({
     queryKey: ['myNotesTotal'],
     queryFn: async () => {
-        const res = await fetch(`https://mypaste.vercel.app/notes?email=${user?.email}`);
+        const res = await fetch(`https://mypaste.vercel.app/notes?email=${user?.email}&uid=${getuid}`);
         const data = await res.json()
         return data
     }

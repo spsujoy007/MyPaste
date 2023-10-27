@@ -7,12 +7,13 @@ import NoteCard from './NoteCard';
 const MyNotes = ({filedData}) => {
     const {user, fieldValue} = useContext(AuthContext)
     const {filteredData, setFilteredData, searchField} = filedData;
+    const getuid = localStorage.getItem("user_id");
 
     
     const {data: myNotes = [], refetch, isLoading} = useQuery({
         queryKey: ['myNotes'],
         queryFn: async () => {
-            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user.email}`);
+            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user.email}&uid=fdsfs`);
             const data = await res.json()
             return data
         }
