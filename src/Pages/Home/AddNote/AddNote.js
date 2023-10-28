@@ -9,8 +9,26 @@ import { AuthContext } from '../../../Context/AuthProvider';
 const AddNote = ({filedData}) => {
     const {setFieldValue} = useContext(AuthContext);
     const {searchField, setSearchField} = filedData;
-    const page = useLocation();
+    // const page = useLocation();
     // console.log('page')
+    const [holderNum, setHolderNum] = useState(0);
+    const placeholders = [
+        {text: "search here..."},
+        {text: "type: cl_bluedream"},
+        {text: "type: cl_redbull"},
+        {text: "type: cl_blackberry"},
+        {text: "type: cl_teal"},
+        {text: "type: default"},
+    ]
+        setTimeout(() =>{
+            if(holderNum < 5)
+            {
+                setHolderNum(holderNum+1)
+            }
+            else{
+                setHolderNum(0);
+            }
+        },4000)
     
     const handleCustomTheme = (themeName) => {
         if(themeName === 'cl_redbull' || themeName === 'cl_blackberry' || themeName === 'default' || themeName === 'cl_bluedream' || themeName === 'cl_teal'){
@@ -28,7 +46,7 @@ const AddNote = ({filedData}) => {
                     setSearchField(e.target.value)
                     setFieldValue(e.target.value)
                     handleCustomTheme(e.target.value)
-                }} className='input input-bordered bg-[#f0f0f0] w-full text-primary border-primary' placeholder='search here...'/>
+                }} className='input input-bordered bg-[#f0f0f0] w-full text-primary border-primary' placeholder={placeholders[holderNum].text}/>
 
                 <button onClick={() => setSearchField('')} className='text-primary font-bold -ml-12 rounded-md p-4 '><RxCross2></RxCross2></button>
                 </div>

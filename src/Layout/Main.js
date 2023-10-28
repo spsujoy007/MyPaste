@@ -37,6 +37,7 @@ const Main = () => {
     logout()
     .then(() => {
       localStorage.removeItem("user_id");
+      localStorage.removeItem("userdata");
       window.location.reload()
     })
     .catch(e => {

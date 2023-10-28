@@ -1,9 +1,21 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 const MyProfile = () => {
     const {user} = useContext(AuthContext)
+
+    const {data: myNotes = [], refetch, isLoading} = useQuery({
+        queryKey: ['myNotes'],
+        queryFn: async () => {
+            const res = await fetch(`https://mypaste.vercel.app/notes?email=${user.email}&uid=fdsfs`);
+            const data = await res.json()
+            return data
+        }
+    })
+    // setFilteredData(myNotes)
+    refetch()
 
     return (
         <div className='md:max-w-[800px] mx-auto pt-10 mt-10 px-10 rounded-xl md:px-0 bg-white'>
@@ -14,18 +26,21 @@ const MyProfile = () => {
                     </div>
                 </div>
                 <div className='md:text-left text-center md:mt-0 mt-5'>
-                    <h2 className='text-3xl uppercase font-semibold text-primary'>{user?.displayName}</h2>
-                    <h5 className='text-md text-secondary'>{user?.email}</h5>
+                    <h2 className='text-3xl uppercase font-semibold text-primary select-none'>{user?.displayName}</h2>
+                    <h5 className='text-md text-secondary select-none'>{user?.email}</h5>
                     <Link to={'/'}>
-                        <button className='px-10 mt-5 py-2 bg-primary hover:bg-secondary text-white uppercase rounded-md'>Home</button>
+                        <button className='px-10 mt-5 py-2 bg-primary hover:bg-secondary text-white uppercase rounded-md'>Notes</button>
                     </Link>
                 </div>
             </div>
-            <div className='p-3 bg-[#2b2b2b]'>
-            <div className="avatar">
-                <div className="w-[40px] rounded-full">
-                        <img className='' src={user?.photoURL} alt="" />
+            <div className='px-3 py-2 rounded-b-xl bg-secondary  flex items-center gap-5'>
+                <div className="avatar">
+                    <div className="w-[30px] rounded-full">
+                            <img className='' src={user?.photoURL} alt="" />
                     </div>
+                </div>
+                <div>
+                    <p className='text-neutral'>total notes: <span className='font-bold'>{myNotes.length}</span></p>
                 </div>
             </div>
         </div>
