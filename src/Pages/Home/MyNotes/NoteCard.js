@@ -70,7 +70,7 @@ const NoteCard = ({mynote, callRefetch}) => {
 
     return (
         <div className={`rounded-3xl overflow-hidden h-[${title.length}] bg-white noteCard  hover:shadow-2xl hover:shadow-secondary  duration-500`}>
-            <div className='p-3 flex items-start h-[250px]' onClick={() => navigate(`/note/${_id}`)}>
+            <div className='p-3 flex items-start md:h-[250px] min-h-[50px]' onClick={() => navigate(`/note/${_id}`)}>
                 <img  className='w-[48px] p-[2px] border-2 border-neutral h-[48px] rounded-full' src={cardAvatar[avtnum].img} alt='logo'/>
                 <div className='ml-[23px]'>
                     <h1 
