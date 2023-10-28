@@ -40,6 +40,8 @@ const MyNotes = ({filedData}) => {
         </div>
       </div>
     }
+
+    
     
     return (
         <div className='mt-10'>

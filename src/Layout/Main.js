@@ -17,7 +17,7 @@ const Main = () => {
   const {data: myNotesTotal = [], refetch, isLoading} = useQuery({
     queryKey: ['myNotesTotal'],
     queryFn: async () => {
-        const res = await fetch(`https://mypaste.vercel.app/notes?email=${user?.email}&uid=${getuid}`);
+        const res = await fetch(`https://mypaste.vercel.app/notes?email=${userData?.email}&uid=${userData?.uid}`);
         const data = await res.json()
         return data
     }

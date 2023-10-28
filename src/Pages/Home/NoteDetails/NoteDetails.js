@@ -139,7 +139,7 @@ const NoteDetails = () => {
 
 
     return (
-        <div className='md:max-w-[900px] md:p-0 p-3 mx-auto'>
+        <div className='md:max-w-[900px]   mx-auto'>
             {
                 loading ?
                 <LoaderCustom></LoaderCustom>
@@ -187,14 +187,14 @@ const NoteDetails = () => {
                     <div className='flex justify-end my-3'>
                         <p className='text-neutral'>Just click the <span className='font-bold'>title</span> or <span className='font-bold'>note</span> to edit</p>
                     </div>
-                <div className='bg-accent caret-primary p-5 rounded-t-xl border-2 border-primary '>
+                <div className='bg-accent caret-primary p-3 mt-5 rounded-t-xl  border-primary'>
 
-                    <input name='title' className='md:text-3xl text-lg w-full bg-accent caret-primary text-neutral font-semibold outline-none cursor-text' type="text" defaultValue={title} placeholder='title' />
+                    <input name='title' className='md:text-3xl text-lg w-full bg-accent caret-red-500 text-neutral font-semibold outline-none cursor-text' type="text" defaultValue={title} placeholder='title' />
 
                     <div className="mt-5">
-                        <span className='font-bold uppercase mr-2 text-primary' >Note:</span>  <br />
+                        <span className='font-bold uppercase select-none mr-2 text-primary' >Note:</span>  <br />
                         
-                        <textarea name="note" placeholder='type your note...' className=' caret-red-500 text-white rounded-xl cursor-text p-5 mt-3 outline-none text-md break-words bg-neutral whitespace-pre-line w-full min-h-[400px]' type="text" defaultValue={note} />
+                        <textarea name="note" placeholder='type your note...' className=' caret-red-500 text-neutral rounded-xl cursor-text p-3 mt-3 outline-none text-md break-words bg- whitespace-pre-line w-full min-h-[400px]' type="text" defaultValue={note} />
                     </div>
                 </div>
 
@@ -204,7 +204,7 @@ const NoteDetails = () => {
                         saveFormLoad ?
                         <button type='submit' className='text-xl bg-primary loading hover:bg-secondary duration-200 text-white rounded-b-md py-1 px-5 w-full'>Saving...</button>
                         :
-                        <button type='submit' className='text-xl bg-primary hover:bg-secondary duration-200 text-white rounded-b-md py-1 px-5 w-full'>Save</button>
+                        <button type='submit' className='text-xl bg-primary hover:bg-secondary duration-200 text-white rounded-md py-1 px-5 w-full'>Save</button>
                     }
                 </div>
 
@@ -225,7 +225,7 @@ const NoteDetails = () => {
                 }
 
                 <div className="mt-5">
-                    <span className='font-bold uppercase mr-2 text-primary ' >Note:</span>  <br />
+                    <span className='font-bold select-none uppercase mr-2 text-primary ' >Note:</span>  <br />
                     <p className='text-neutral mt-3 text-md break-words whitespace-pre-line'>
                         {note}
                     </p>

@@ -6,7 +6,7 @@ import './NoteCard.css'
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../../../Context/DataProvider';
 
-const NoteCard = ({mynote, callRefetch, index}) => {
+const NoteCard = ({mynote, callRefetch}) => {
     const {setCallRefetch} = useContext(DataContext)
 
     const {title, _id, note} = mynote;
@@ -35,6 +35,22 @@ const NoteCard = ({mynote, callRefetch, index}) => {
         }
     }
 
+    const cardAvatar = [
+        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Jasmine"},
+        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Lily"},
+        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Kitty"},
+        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Max"},
+        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Bailey"},
+
+        {img: "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=Zoey"},
+        {img: "https://api.dicebear.com/7.x/thumbs/svg?seed=Annie"},
+        {img: "https://api.dicebear.com/7.x/thumbs/svg?seed=Max&backgroundColor=f1f4dc&shapeColor=f88c49"},
+        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Cleo"},
+        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=333364455566%2B%2B%2B%2B%2B"},
+    ]
+    let avtnum = Math.ceil(Math.random()*9);
+
+
     const handleDeleteNote = (id) => {
         setLoading(true)
         fetch(`https://mypaste.vercel.app/deletenote?id=${id}`, {
@@ -55,7 +71,7 @@ const NoteCard = ({mynote, callRefetch, index}) => {
     return (
         <div className={`rounded-3xl overflow-hidden h-[${title.length}] bg-white noteCard  hover:shadow-2xl hover:shadow-secondary  duration-500`}>
             <div className='p-3 flex items-start h-[250px]' onClick={() => navigate(`/note/${_id}`)}>
-                    <img  className='w-[48px] p-[2px] border-2 border-neutral h-[48px] rounded-full' src={'https://api.dicebear.com/7.x/shapes/svg?seed=Simba'} alt='logo'/>
+                <img  className='w-[48px] p-[2px] border-2 border-neutral h-[48px] rounded-full' src={cardAvatar[avtnum].img} alt='logo'/>
                 <div className='ml-[23px]'>
                     <h1 
                         data-tip='Click to copy' 

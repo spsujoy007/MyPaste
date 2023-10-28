@@ -7,11 +7,12 @@ import { DataContext } from '../../../Context/DataProvider';
 const PinnedNote = () => {
 const {user} = useContext(AuthContext)
     const {callRefetch} = useContext(DataContext)
+    const userdata = JSON.parse(localStorage.getItem('userdata'))
 
     const {data: pinednotes = [], refetch, isLoading} = useQuery({
         queryKey: ["pinednotes"],
         queryFn: async () =>{
-            const res = await fetch(`https://mypaste.vercel.app/pinnotes?email=${user?.email}`);
+            const res = await fetch(`https://mypaste.vercel.app/pinnotes?email=${userdata?.email}`);
             const data = await res.json()
             return data
         }
