@@ -32,8 +32,9 @@ const AddNote = ({filedData}) => {
     
     const handleCustomTheme = (themeName) => {
         if(themeName === 'cl_redbull' || themeName === 'cl_blackberry' || themeName === 'default' || themeName === 'cl_bluedream' || themeName === 'cl_teal'){
+            const theme = themeName.toLowerCase();
             // setMyTheme(themeName)
-            localStorage.setItem('currentTheme', themeName)
+            localStorage.setItem('currentTheme', theme)
         }
     }
     
@@ -45,7 +46,7 @@ const AddNote = ({filedData}) => {
                 <input type="text" value={searchField} onChange={(e) => {
                     setSearchField(e.target.value)
                     setFieldValue(e.target.value)
-                    handleCustomTheme(e.target.value)
+                    handleCustomTheme(e.target.value.toLowerCase())
                 }} className='input input-bordered bg-[#f0f0f0] w-full text-primary border-primary' placeholder={placeholders[holderNum].text}/>
 
                 <button onClick={() => setSearchField('')} className='text-primary font-bold -ml-12 rounded-md p-4 '><RxCross2></RxCross2></button>

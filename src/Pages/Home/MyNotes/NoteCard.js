@@ -35,20 +35,20 @@ const NoteCard = ({mynote, callRefetch}) => {
         }
     }
 
-    const cardAvatar = [
-        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Jasmine"},
-        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Lily"},
-        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Kitty"},
-        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Max"},
-        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Bailey"},
+    // const cardAvatar = [
+    //     {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Jasmine"},
+    //     {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Lily"},
+    //     {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Kitty"},
+    //     {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Max"},
+    //     {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Bailey"},
 
-        {img: "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=Zoey"},
-        {img: "https://api.dicebear.com/7.x/thumbs/svg?seed=Annie"},
-        {img: "https://api.dicebear.com/7.x/thumbs/svg?seed=Max&backgroundColor=f1f4dc&shapeColor=f88c49"},
-        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Cleo"},
-        {img: "https://api.dicebear.com/7.x/shapes/svg?seed=333364455566%2B%2B%2B%2B%2B"},
-    ]
-    let avtnum = Math.ceil(Math.random()*9);
+    //     {img: "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=Zoey"},
+    //     {img: "https://api.dicebear.com/7.x/thumbs/svg?seed=Annie"},
+    //     {img: "https://api.dicebear.com/7.x/thumbs/svg?seed=Max&backgroundColor=f1f4dc&shapeColor=f88c49"},
+    //     {img: "https://api.dicebear.com/7.x/shapes/svg?seed=Cleo"},
+    //     {img: "https://api.dicebear.com/7.x/shapes/svg?seed=333364455566%2B%2B%2B%2B%2B"},
+    // ]
+    // let avtnum = Math.ceil(Math.random()*9);
 
 
     const handleDeleteNote = (id) => {
@@ -70,8 +70,9 @@ const NoteCard = ({mynote, callRefetch}) => {
 
     return (
         <div className={`rounded-3xl overflow-hidden h-[${title.length}] bg-white noteCard  hover:shadow-2xl hover:shadow-secondary  duration-500`}>
-            <div className='p-3 flex items-start md:h-[250px] min-h-[50px]' onClick={() => navigate(`/note/${_id}`)}>
-                <img  className='w-[48px] p-[2px] border-2 border-neutral h-[48px] rounded-full' src={cardAvatar[avtnum].img} alt='logo'/>
+            <div className='p-3 flex items-start md:h-[150px] min-h-[50px]' onClick={() => navigate(`/note/${_id}`)}>
+                {/* <img  className='w-[48px] p-[2px] border-2 border-neutral h-[48px] rounded-full' src={cardAvatar[avtnum].img} alt='logo'/> */}
+                <h1 className='text-4xl text-white '>{title.slice(0,2) > 'a' ? title.slice(0,2) :  <p className='w-[50px] h-[50px] text-5xl  text-center bg-primary rounded-full'>{title.slice(0,1)}</p> }</h1>
                 <div className='ml-[23px]'>
                     <h1 
                         data-tip='Click to copy' 
@@ -80,7 +81,7 @@ const NoteCard = ({mynote, callRefetch}) => {
                         setButtonCopy(true)
                         setTimeout(() => setButtonCopy(false), 3000)
                     }} className='text-[20px] tooltip tooltip-bottom text-left font-semibold text-neutral'>{title.length ? title.slice(0,25) : note.slice(0,32)}</h1>
-                    <p className='text-neutral text-sm w-[95%] h-[80%] overflow-hidden'>{note.slice(0, 200)}...</p>
+                    <p className='text-neutral text-sm w-[95%] h-[80%] overflow-hidden'>{note.slice(0, 120)}...</p>
                 </div>
             </div>
 

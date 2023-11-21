@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import NoteCard from './NoteCard';
+import SortedNotes from './SortedNotes';
 
 const MyNotes = ({filedData}) => {
     const {user, fieldValue} = useContext(AuthContext)
@@ -14,6 +15,14 @@ const MyNotes = ({filedData}) => {
         queryKey: ['myNotes'],
         queryFn: async () => {
             const res = await fetch(`https://mypaste.vercel.app/notes?email=${getuid.email}&uid=${getuid.uid}`);
+            const data = await res.json()
+            return data
+        }
+    })
+    const {data: myNotesSorted = []} = useQuery({
+        queryKey: ['myNotesSorted'],
+        queryFn: async () => {
+            const res = await fetch(`https://mypaste.vercel.app/sortednotes?email=${getuid.email}&uid=${getuid.uid}`);
             const data = await res.json()
             return data
         }
@@ -45,12 +54,26 @@ const MyNotes = ({filedData}) => {
     
     return (
         <div className='mt-10'>
+            <div className='md:block hidden'>
+            {
+                myNotesSorted.length > 0 && 
+                <>
+                    <p className='text-secondary uppercase'>Highest copied notes...</p>
+                    <div className='flex items-center gap-2 flex-wrap'>
+                        {
+                            myNotesSorted.slice(0,4).map(note => <SortedNotes notes={note} callRefetch={callRefetch}></SortedNotes>)
+                        }
+                    </div>
+                </>
+            }
+            </div>
             {
                  myNotes.length  > 0 ?
-            <div className={`grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-5`}>
+            <div className={`grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-5 mt-10`}>
                 {
                     filteredData ?
                     <>
+                    
                         {
                             filteredData.length > 0 ?
                             filteredData.map((mynote, i) => <NoteCard
