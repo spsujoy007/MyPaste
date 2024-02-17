@@ -1,70 +1,47 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MyPaste
 
-## Available Scripts
+ Overview: MyPaste simplifies note-taking with customizable themes and smart note
+management, including pinning, copying, and an intelligent sorting system.
 
-In the project directory, you can run:
+* "MyPaste" is a user-friendly notepad website where users can sign up with Google, customize themes using search keywords, and effortlessly manage notes.
 
-### `npm start`
+* Key features include pinning important notes, user-friendly note cards for easy copying, and intelligent sorting that prioritizes frequently copied notes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Enhance your note-taking experience with "MyPaste," a seamless platform for efficient organization and personalization.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+![Logo](https://i.ibb.co/ckQ9Wzb/mypastelogo.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## AUTHOR
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [@spsujoy007](https://github.com/spsujoy007)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+- 5 diffrent themes - access with: **cl_bluedream**, **cl_redbull**, **cl_blackberry**, **cl_teal** and back to **default** theme just type: default in **[search bar]**.
+- Note: **Add, edit, delete, edit**.
+- You can **pinup** a important note.
+- Showing **most copied notes** in top of the website.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Demo and description
+Live site link: https://mypaste-app.web.app/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Server site repo: https://github.com/spsujoy007/MyPaste-server
+## Screenshots:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![App Screenshot](https://i.ibb.co/VM0816T/Screenshot-2023-12-03-225402.png)
 
-## Learn More
+![App Screenshot](https://i.ibb.co/g7YJgG9/Screenshot-2023-12-03-225425.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![App Screenshot](https://i.ibb.co/5hJvVcQ/Screenshot-2023-12-03-225553.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![App Screenshot](https://i.ibb.co/BV9WjkN/Screenshot-2023-12-03-225610.png)
 
-### Code Splitting
+![App Screenshot](https://i.ibb.co/RHP1Kd7/Screenshot-2023-12-03-225625.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![App Screenshot](https://i.ibb.co/NKxQdCP/Screenshot-2023-12-03-225651.png)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
