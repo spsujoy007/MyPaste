@@ -16,7 +16,7 @@ const SingleNote = ({mynote}) => {
     return (
         <div onClick={clickToCopy} className='px-2 py-3 bg-accent mt-2 rounded-xl cursor-pointer duration-500 h-[50px] hover:h-[80px] overflow-hidden'>
             <div  className="flex justify-between items-center mb-3">
-                <h4  className='text-neutral font-semibold text-md uppercase'>{title ? title.slice(0,20) : note.slice(0,20)}</h4>
+                <h4  className='text-neutral  font-semibold text-md uppercase'>{title ? title.slice(0,20) : note.slice(0,20)}</h4>
                 <Link to={`/note/${mynote._id}`} className='px-2 py-1 h-full'>
                     <AiFillEye className='text-xl text-neutral '></AiFillEye>
                 </Link>
