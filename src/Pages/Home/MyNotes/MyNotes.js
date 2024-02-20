@@ -58,10 +58,10 @@ const MyNotes = ({filedData}) => {
             {
                 myNotesSorted.length > 0 && 
                 <>
-                    <p className='text-primary textarea-md  capitalize'>Highest copied notes...</p>
-                    <div className='flex items-center gap-2 flex-wrap'>
+                    <p className='text-primary pb-1 text-sm  uppercase'>Highest copied notes...</p>
+                    <div className='md:grid lg:grid-cols-4 grid-cols-3  gap-5 '>
                         {
-                            myNotesSorted.slice(0,4).map(note => <SortedNotes notes={note} callRefetch={callRefetch}></SortedNotes>)
+                            myNotesSorted.slice(0,4).map(note => <SortedNotes key={note._id} notes={note} callRefetch={callRefetch}></SortedNotes>)
                         }
                     </div>
                 </>

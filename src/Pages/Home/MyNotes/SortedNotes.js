@@ -44,7 +44,7 @@ const SortedNotes = ({notes, callRefetch}) => {
         <div onClick={() => {
             callRefetch()
             clickToCopy()
-            }} className='border-[1px] hover:border-transparent hover:shadow-lg border-secondary cursor-pointer bg-white p-2 flex items-center gap-3 min-w-full md:min-w-[300px] rounded-lg'>
+            }} className='border-[1px] hover:border-transparent hover:shadow-lg hover:border-secondary cursor-pointer bg-white p-2 flex items-center gap-3 min-w-full lg:min-w-[300px] md:min-w-[200px] rounded-2xl duration-300'>
             <img className='w-[40px] h-[40px] rounded-full ' src={cardAvatar[avtnum].img} alt='' />
             <div>
                 <h2 className='text-primary uppercase text-xs font-bold  flex items-center'>{title.slice(0,20)} <span className='text-sm'> - {copied_count}</span> </h2>

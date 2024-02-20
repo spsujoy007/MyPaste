@@ -139,7 +139,8 @@ const NoteDetails = () => {
 
 
     return (
-        <div className='md:max-w-[900px]   mx-auto'>
+        // <div className='md:max-w-[900px]   mx-auto'>
+        <div className='px-10'>
             {
                 loading ?
                 <LoaderCustom></LoaderCustom>
