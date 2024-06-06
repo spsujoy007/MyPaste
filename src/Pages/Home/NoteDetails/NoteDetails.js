@@ -217,7 +217,7 @@ const NoteDetails = () => {
 
                 :
 
-                <div className='bg-white p-5 rounded-xl'>
+                <div className='bg-white md:p-8 p-5 rounded-3xl'>
                 {
                     title ? 
                     <h1 className='text-3xl text-neutral font-semibold'>{title}</h1>

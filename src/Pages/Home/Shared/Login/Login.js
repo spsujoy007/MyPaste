@@ -4,10 +4,17 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../../../Context/AuthProvider';
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../../../../'
 
 const Login = () => {
     const {login, user, googleSign} = useContext(AuthContext);
     const [error, setError] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null)
+
+
+
+    //// I have to work on this error handling - most important notice ---------------;
+
     const navigate = useNavigate()
 
     if(user){
@@ -31,8 +38,12 @@ const Login = () => {
             }
         })
         .catch(e => {
-            console.error(e)
-            setError(e.message)
+            if(e.message){
+                if(e.message === "Firebase: Error (auth/user-not-found).")
+                {
+                    setError("Maybe your email or password is incorrect. Try again!")
+                }
+            }
         })}
 
         const handleGoogleSign = () => {
@@ -87,27 +98,30 @@ const Login = () => {
         <div className="md:p-20 p-5">
             {
                 !user &&
-                <div className="px-5 py-10 bg-white rounded-xl">
+                <div className="px-10 py-10 bg-white rounded-3xl">
                 <div className="border-b-2 border-accent pb-2">
+                    <img alt='' src='../../'/>
+                    
                     <h2 className='text-3xl font-bold uppercase text-primary  text-left '>Login</h2>
                     
                 </div>
                 <div className="flex md:flex-row flex-col gap-10">
                 <form onSubmit={handleSignIn} className="mt-6 flex flex-col md:w-[50%]">
 
-                    <input name='email' required type="email" placeholder='type your email' className='py-3 bg-accent px-2 border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
+                    <input name='email' required type="email" placeholder='type your email' className='py-3 px-2 border-b-[1px] border-primary outline-none text-lg text-primary mt-5'/>
 
-                    <input name='password' required type="password" placeholder='your password' className='py-3 bg-accent px-2  border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
+                    <input name='password' required type="password" placeholder='type your password' className='py-3 px-2  border-b-[1px] border-primary outline-none text-lg text-primary mt-5'/>
 
                     {error && <h2 className='text-red-500'>{error}</h2>}
                     <button type='submit' className='uppercase mt-6 rounded-full hover:bg-neutral duration-150 py-3 px-5 bg-primary text-white'>
                         Login
                     </button>
                     
-                    <h3 className='mt-2 text-primary'>Are you new in MyPaste? Please <br/> <Link className='text-neutral underline font-bold' to='/signup'>Sign up</Link></h3>
+                    <h3 className='mt-3 ml-1 text-primary'>Are you new in MyPaste? Please <Link className='text-neutral underline font-bold' to='/signup'>Sign up</Link></h3>
+                    
                 </form>
 
-                <div className='mt-6 flex items-center justify-center md:w-[50%]'>
+                <div className='md:mt-0 mt-6 flex items-center justify-center md:w-[50%]'>
                     {/* <h2 className='text-primary text-lg'>Social Signup</h2> */}
                     <button onClick={() => handleGoogleSign()} className='py-2 px-5 flex gap-2 text-md items-center border-[1px] rounded-full duration-150 border-gray-700 text-gray-700 hover:px-8'><FcGoogle className='text-xl'></FcGoogle> Continue with google</button>
                 </div>

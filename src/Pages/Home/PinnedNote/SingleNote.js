@@ -11,6 +11,17 @@ const SingleNote = ({mynote}) => {
     const clickToCopy = () => {
         navigator.clipboard.writeText(mynote?.note)
         toast.success(`${mynote?.title ? mynote.title.slice(0,15) : note.slice(0, 15)} COPIED!`)
+        const url = `https://mypaste.vercel.app/copiedCount?id=${mynote._id}`
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
     }
 
     return (

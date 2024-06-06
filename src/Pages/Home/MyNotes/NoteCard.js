@@ -81,7 +81,7 @@ const NoteCard = ({mynote, callRefetch}) => {
                         setButtonCopy(true)
                         setTimeout(() => setButtonCopy(false), 3000)
                     }} className='text-[20px] tooltip tooltip-bottom text-left font-semibold text-neutral'>{title.length ? title.slice(0,25) : note.slice(0,32)}</h1>
-                    <p className='text-neutral text-sm w-[95%] h-[80%] overflow-hidden'>{note.slice(0, 120)}...</p>
+                    <p className='text-neutral text-sm w-[250px] h-[80%] overflow-hidden break-words whitespace-pre-line'>{note.slice(0, 120)}...</p>
                 </div>
             </div>
 

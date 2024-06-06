@@ -28,44 +28,72 @@ const Signup = () => {
 
         const imgbbsecret = "876f7bf0abd5da8479ed8a9da69a1c78";
         const formData = new FormData();
-        formData.append('image', profileImg);
-        const url = `https://api.imgbb.com/1/upload?key=${imgbbsecret}`;
-        fetch(url, {
-        method: 'POST',
-        body: formData
-        })
-        .then(res => res.json())
-        .then(pictureData => {
-            if(pictureData.success){
-                const pictureURL = pictureData.data.url;
-                createUser(email, password)
-                .then(result => {
-                    const user = result.user;
-                    if(user.uid){
-                        updateProfile(name, pictureURL)
-                        handleAddNote(user.email)
-                        localStorage.setItem("user_id", user.uid);
-                        toast.success(`Welcome ${user.displayName}`)
-                        navigate('/')
-                    }
-                })
-                .catch(e => {
-                    console.error(e)
-                    setError(e.message)
-                })
-            }
-        })
+        if(profileImg){
+            formData.append('image', profileImg);
+            const url = `https://api.imgbb.com/1/upload?key=${imgbbsecret}`;
+            fetch(url, {
+            method: 'POST',
+            body: formData
+            })
+            .then(res => res.json())
+            .then(pictureData => {
+                if(pictureData.success){
+                    const pictureURL = pictureData.data.url;
+                    createUser(email, password)
+                    .then(result => {
+                        const user = result.user;
+                        if(user.uid){
+                            updateProfile(name, pictureURL)
+                            handleAddNote(user.email)
+                            localStorage.setItem("user_id", user.uid);
+                            toast.success(`Welcome ${user.displayName}`)
+                            navigate('/')
+                        }
+                    })
+                    .catch(e => {
+                        console.error(e)
+                        setError(e.message)
+                    })
+                }
+            })
+        }
+        else{
+            createUser(email, password)
+                    .then(result => {
+                        const user = result.user;
+                        if(user.uid){
+                            updateProfile(name)
+                            handleAddNote(user.email)
+                            localStorage.setItem("user_id", user.uid);
+                            toast.success(`Welcome ${user.displayName}`)
+                            navigate('/')
+                        }
+                    })
+                    .catch(e => {
+                        console.error(e)
+                        setError(e.message)
+                    })
+        }
         
     }
 
     const updateProfile = (name, picture) => {
-        const profile = {
-            displayName: name,
-            photoURL: picture
+        if(profileImg){
+            const profile = {
+                displayName: name,
+                photoURL: picture
+            }
+            updateUserData(profile)
+            .then(() => {})
+            .catch(e => setError(e.message))
+        }else{
+            const profile = {
+                displayName: name,
+            }
+            updateUserData(profile)
+            .then(() => {})
+            .catch(e => setError(e.message))
         }
-        updateUserData(profile)
-        .then(() => {})
-        .catch(e => setError(e.message))
     }
     
     const handleViewPhoto = (e) => {
@@ -132,7 +160,7 @@ You can change the theme of the website. 💖
 
     return (
         <div className="md:p-20 p-5">
-            <div className="px-5 py-10 bg-white rounded-xl">
+            <div className="px-10 py-10 bg-white rounded-3xl">
                 <div className="flex justify-between items-center border-b-2 border-accent pb-2">
                     <h2 className='text-3xl font-bold uppercase text-primary  text-left '>Sign up</h2>
                     {
@@ -157,11 +185,11 @@ You can change the theme of the website. 💖
                         <input onChange={handleViewPhoto} accept="image/jpeg, image/png"  className='hidden' id='pic' type="file" />
                     </label>
 
-                    <input onChange={(e) => setHeadName(e.target.value)} name='name' required type="text" placeholder='type your name...' className='py-3 bg-accent px-2 rounded-t-xl border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
+                    <input onChange={(e) => setHeadName(e.target.value)} name='name' required type="text" placeholder='type your name...' className='py-3 px-2 rounded-t-xl border-b-[1px] border-primary outline-none text-lg text-primary mt-5'/>
 
-                    <input name='email' required type="email" placeholder='type your email' className='py-3 bg-accent px-2 border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
+                    <input name='email' required type="email" placeholder='type your email' className='py-3 px-2 border-b-[1px] border-primary outline-none text-lg text-primary mt-5'/>
 
-                    <input name='password' required type="password" placeholder='create a password' className='py-3 bg-accent px-2  border-b-2 border-primary outline-none text-lg text-primary mt-5'/>
+                    <input name='password' required type="password" placeholder='create a password' className='py-3 px-2  border-b-[1px] border-primary outline-none text-lg text-primary mt-5'/>
 
                     {error && <h2 className='text-red-500'>{error}</h2>}
                     <button type='submit' className='mt-6 rounded-full hover:bg-neutral duration-150 py-3 px-5 bg-primary text-white'>

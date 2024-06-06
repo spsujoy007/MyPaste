@@ -28,7 +28,7 @@ const MyNotes = ({filedData}) => {
         }
     })
     // setFilteredData(myNotes)
-    refetch()
+    // refetch()
 
     useEffect(() => {
         const filtering = myNotes.filter(note => 
